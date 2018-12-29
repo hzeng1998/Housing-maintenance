@@ -4,4 +4,4 @@ Main functions:
 * Allow landlords to upload houses for rent
 * Keep track of various home equipments
 * Remind users to maintain their houses in time
-* Provide maintenance service of related companies
+* Provide maintenance service of related companies 
