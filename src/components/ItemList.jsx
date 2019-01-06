@@ -10,7 +10,7 @@ const styles = theme => ({
       maxWidth: 560,
       margin: '0 auto',
       marginTop: theme.spacing.unit * 3,
-      marginBottom: theme.spacing.unit * 2,
+      marginBottom: theme.spacing.unit * 1,
       backgroundColor: theme.palette.background.paper,
     },
 });

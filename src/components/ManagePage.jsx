@@ -2,7 +2,9 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import FlashIcon from '@material-ui/icons/FlashOn';
+import DeviceIcon from '@material-ui/icons/FlashOn';
+import HouseIcon from '@material-ui/icons/LocationCity';
+import OrderIcon from '@material-ui/icons/EventNote';
 import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
@@ -53,13 +55,19 @@ class ManagePage extends React.Component {
                     <Grid container spacing={16}>
                         <Grid item xs={12}>
                             <CardActionArea className={classes.block}>
-                                <FlashIcon className={classes.icon}/>
+                                <HouseIcon className={classes.icon}/>
+                                <Typography className={classes.text}>Houses</Typography>
+                            </CardActionArea>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <CardActionArea className={classes.block}>
+                                <DeviceIcon className={classes.icon}/>
                                 <Typography className={classes.text}>Devices</Typography>
                             </CardActionArea>
                         </Grid>
                         <Grid item xs={12}>
                             <CardActionArea className={classes.block}>
-                                <FlashIcon className={classes.icon}/>
+                                <OrderIcon className={classes.icon}/>
                                 <Typography className={classes.text}>Orders</Typography>
                             </CardActionArea>
                         </Grid>

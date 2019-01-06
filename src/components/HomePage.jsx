@@ -7,9 +7,7 @@ import BottomNav from './BottomNav'
 const notes = [
     {title: "Repair order", time: "Tomorrow 15:00"},
     {title: "Alarm Garden Maintain",time: "5 days later"},
-    {title: "Alarm Roof Maintain", time: "10 days later"},
-    {title: "Pipe maintain", time: "2019-1-20",},
-    {title: "Table repair", time: "2019-2-1"},
+    {title: "Pipe maintain", time: "2019-1-20"},
   ]
 
 class HomePage extends React.Component {

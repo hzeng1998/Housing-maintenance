@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography'
 import grey from '@material-ui/core/colors/grey';
 import List from '@material-ui/core/List';
-import Item from '../Item'
+import SupplierItem from './SupplierItem';
 
 const styles = theme => ({
     container: {
@@ -27,7 +27,7 @@ const styles = theme => ({
 const suppliers = [
     {id: '1', name: "Yale Repair", star: "5.0", info: "2.5km $30/ser"},
     {id: '2', name: "Fair Repair", star: "4.8", info: "3.5km $15/ser"},
-    {id: '3', name: "168 fix it", star: "4.5", info: "3.5km $40/ser"},
+    {id: '3', name: "168 Fix It", star: "4.5", info: "3.5km $40/ser"},
 ]
 
 class SupplierList extends React.Component {
@@ -36,12 +36,12 @@ class SupplierList extends React.Component {
         return(
             <div className={classes.container}>
                 <div className={classes.title}>
-                    <h3>Maintain Server</h3>
+                    <h3>Maintain Service</h3>
                 </div>
                 <div>
                 <List className={classes.list}>
                     { suppliers.map( (item, index) =>
-                        <Item key={index} content={item} Component={Link} to='/house/maintain/supplier?id={item.id}' />
+                        <SupplierItem key={index} content={item} Component={Link} to='/house/maintain/supplier?id={item.id}' />
                     )}
                 </List>
                 </div>
