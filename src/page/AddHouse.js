@@ -43,7 +43,7 @@ const styles = theme => ({
   }
 });
 
-function House(props) {
+function AddHouse(props) {
 
   const {classes} = props;
   return (
@@ -104,8 +104,8 @@ function House(props) {
   );
 }
 
-House.propTypes = {
+AddHouse.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(House);
+export default withStyles(styles)(AddHouse);
