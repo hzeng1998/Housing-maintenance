@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 .idea/inspectionProfiles/
 .idea/vcs.xml
+/.idea/codeStyles/codeStyleConfig.xml
+/.idea/workspace.xml
