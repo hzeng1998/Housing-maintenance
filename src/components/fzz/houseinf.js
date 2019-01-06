@@ -92,7 +92,7 @@ class houseInf extends React.Component {
     });
   };
   handleSubmit(event) {
-    console.log('A name was submitted: ' + this.state.FName);
+    console.log('A name was submitted: ' + this.state.Name);
     event.preventDefault();
   }
   onRef = (ref) => {
@@ -128,15 +128,15 @@ class houseInf extends React.Component {
         <MuiThemeProvider theme={theme}>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="FirstName">First Name</InputLabel>
-            <Input id="FirstName" name="FirstName" value={this.state.FName} onChange={this.handleChange('FName')} autoComplete="First Name" autoFocus />
+            <Input id="FirstName" name="FirstName" value={this.state.Name} onChange={this.handleChange('Name')} autoComplete="First Name" autoFocus />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="LastName">Last Name</InputLabel>
-            <Input id="LastName" name="LastName" value={this.state.LName} onChange={this.handleChange("LName")} autoComplete="Last Name"  />
+            <Input id="LastName" name="LastName" value={this.state.Password} onChange={this.handleChange("Password")} autoComplete="Last Name"  />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="Desgintion">Desgintion</InputLabel>
-            <Input id="Desgintion" name="Desgintion" value={this.state.Desgintion} onChange={this.handleChange("Desgintion")} autoComplete="Desgintion"  />
+            <Input id="Desgintion" name="Desgintion" value={this.state.CheckPassword} onChange={this.handleChange("CheckPassword")} autoComplete="Desgintion"  />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="Phone">Tell Us Your Moblie Number</InputLabel>

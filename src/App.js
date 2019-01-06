@@ -12,6 +12,8 @@ import HouseInfo from "./page/HouseInfo";
 import HouseFile from "./page/HouseFile";
 import Device from "./page/Device";
 import HouseBase from './components/HouseBase';
+import SettingResult from "./page/SettingResult";
+import WarrantyResult from "./page/WarrantyResult";
 
 class App extends Component {
   render() {
@@ -29,9 +31,10 @@ class App extends Component {
             <Route path={"/houseinfo"} component={HouseInfo}/>
             <Route path={"/housefile"} component={HouseFile}/>
             <Route path={"/device"} component={Device}/>
-
+            <Route exact path={"/setting/result"} component={SettingResult}/>
             <Route path="/house" component={HouseBase}/>
-            </Switch>
+            <Route path={"/warranty/result"} component={WarrantyResult}/>
+          </Switch>
         </div>
       </Router>
     );

@@ -71,9 +71,9 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      FName: '',
-      LName: '',
-      Desgintion: '',
+      Name: '',
+      Password: '',
+      CheckPassword: '',
       Phone: '',
     };
     this.inputRef = React.createRef();
@@ -150,24 +150,24 @@ class Register extends React.Component {
             <MuiThemeProvider theme={theme}>
 
               <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="FirstName">First Name</InputLabel>
-                <Input id="FirstName" name="FirstName" value={this.state.HouseName} onChange={this.handleChange('HouseName')}
-                       autoComplete="First Name" autoFocus/>
+                <InputLabel htmlFor="Name">Name</InputLabel>
+                <Input id="Name" name="Name" value={this.state.Name} onChange={this.handleChange('Name')}
+                       autoComplete="name" autoFocus/>
               </FormControl>
               <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="LastName">Last Name</InputLabel>
-                <Input id="LastName" name="LastName" value={this.state.Brand} onChange={this.handleChange("Brand")}
-                       autoComplete="Last Name"/>
+                <InputLabel htmlFor="Password">Password</InputLabel>
+                <Input id="Password" name="Password" value={this.state.Password} onChange={this.handleChange("Password")}
+                       autoComplete="new-password"/>
               </FormControl>
               <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="Desgintion">Desgintion</InputLabel>
-                <Input id="Desgintion" name="Desgintion" value={this.state.Desgintion}
-                       onChange={this.handleChange("Desgintion")} autoComplete="Desgintion"/>
+                <InputLabel htmlFor="CheckPassword">Password</InputLabel>
+                <Input id="CheckPassword" name="CheckPassword" value={this.state.CheckPassword}
+                       onChange={this.handleChange("CheckPassword")} autoComplete="new-password"/>
               </FormControl>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="Phone">Tell Us Your Moblie Number</InputLabel>
                 <Input id="Phone" name="Phone" value={this.state.Phone} onChange={this.handleChange("Phone")}
-                       autoComplete="Moblie Number"/>
+                       autoComplete="tel"/>
               </FormControl>
 
               </MuiThemeProvider>

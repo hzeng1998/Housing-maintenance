@@ -8,6 +8,7 @@ import AlarmList from './Alarm/AlarmList';
 import ManagePage from './ManagePage';
 import SupplierList from './Maintain/SupplierList';
 import SupplierInfo from './Maintain/SupplierInfo';
+import ManageDevice from "../page/ManageDevice";
 
 class HouseBase extends React.Component {
     render() {
@@ -21,6 +22,7 @@ class HouseBase extends React.Component {
                     <Route exact path='/house/alarm' component={AlarmList} />
                     <Route exact path='/house/alarm/set' component={SetAlarm} />
                     <Route exact path='/house/manage' component={ManagePage} />
+                  <Route exact path={"/house/manage/devices"} component={ManageDevice}/>
                 </Switch>
                 <BottomNav />
             </div>

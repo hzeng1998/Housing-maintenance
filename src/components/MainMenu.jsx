@@ -25,6 +25,13 @@ import BuildIcon from '@material-ui/icons/Build';
 import AlarmIcon from '@material-ui/icons/Alarm';
 import MemoryIcon from '@material-ui/icons/Memory';
 import OrderIcon from '@material-ui/icons/AssignmentOutlined';
+import {AccountBox} from "@material-ui/icons";
+import {Home} from "@material-ui/icons";
+import {Receipt} from "@material-ui/icons";
+import {AttachMoney} from "@material-ui/icons";
+import {ExitToApp} from "@material-ui/icons";
+import {Settings} from "@material-ui/icons";
+import AvatorImage from "../static/image/avatar.jpg";
 
 const styles = {
     list: {
@@ -113,7 +120,7 @@ class MenuAppBar extends React.Component {
           <div className={classes.list}>
             <List>
                 <Grid container justify="center" alignItems="center">
-                    <Avatar alt="Remy Sharp" src="" className={classes.bigAvatar} />
+                    <Avatar alt="Remy Sharp" src={AvatorImage} className={classes.bigAvatar} />
                 </Grid>
                 <Grid container justify="center" alignItems="center">
                     <Button justify="center" alignItems="center"> Fu Zhengzhe </Button>
@@ -122,32 +129,31 @@ class MenuAppBar extends React.Component {
                 <Divider />
 
                 <ListItem button>
-                     <ListItemIcon> <i className="material-icons"> account_box </i> </ListItemIcon>
+                     <ListItemIcon> <AccountBox/> </ListItemIcon>
                      <ListItemText> Person Information </ListItemText>
                 </ListItem>
                 <ListItem button>
-                    <ListItemIcon> <i className="material-icons"> home </i> </ListItemIcon>
+                    <ListItemIcon> <Home/> </ListItemIcon>
                     <ListItemText> My Houses </ListItemText>
                 </ListItem>
                 <ListItem button>
-                    <ListItemIcon> <i className="material-icons"> receipt </i> </ListItemIcon>
+                    <ListItemIcon> <Receipt/> </ListItemIcon>
                     <ListItemText> My Order </ListItemText>
                 </ListItem>
                 <ListItem button>
-                    <ListItemIcon> <i className="material-icons"> attach_money </i> </ListItemIcon>
+                    <ListItemIcon> <AttachMoney /></ListItemIcon>
                     <ListItemText> My Wallet </ListItemText>
                 </ListItem>
-
 
             </List>
 
             <List>
                 <ListItem button>
-                    <ListItemIcon> <i className="material-icons"> exit_to_app </i> </ListItemIcon>
+                    <ListItemIcon> <ExitToApp/> </ListItemIcon>
                     <ListItemText> Log out </ListItemText>
                 </ListItem>
                 <ListItem button>
-                    <ListItemIcon> <i className="material-icons"> settings </i> </ListItemIcon>
+                    <ListItemIcon> <Settings/> </ListItemIcon>
                     <ListItemText> Settings </ListItemText>
                 </ListItem>
             </List>
@@ -179,7 +185,7 @@ class MenuAppBar extends React.Component {
                                     </div>
                                 </SwipeableDrawer>
                             </Grid>
-                            <Grid item xs = {8} justify="center" alignItems="center">
+                            <Grid item xs = {8} >
                                 <List component="nav">
                                     <ListItem
                                         button
@@ -235,7 +241,7 @@ class MenuAppBar extends React.Component {
                     </div>
                     <br/>
                     <div>
-                        <Grid container justify="center" alignItems="center" spacing={16}>
+                        <Grid container justify="center" spacing={16}>
                             <Grid item xs = {1}/>
                             <Grid item xs>
                                 <center><IconButton color="inherit">
