@@ -1,26 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import HomePage from './page/HomePage'
+import CssBaseline from "@material-ui/core/es/CssBaseline/CssBaseline";
 import './App.css';
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Login from "./page/Login";
+import SignInStart from "./page/SignInStart";
+import Register from "./page/Register";
+import Test from "./page/Test";
+import House from "./page/House";
+import HouseInfo from "./page/HouseInfo";
+import HouseFile from "./page/HouseFile";
+import Device from "./page/Device";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router>
+        <div className="App">
+          <CssBaseline/>
+          <Switch>
+            <Route exact path={"/"} component={HomePage}/>
+            <Route path={"/login"} component={Login}/>
+            <Route path={"/signup"} component={SignInStart}/>
+            <Route path={"/house"} component={House}/>
+            <Route path={"/register/:email"} component={Register}/>
+            <Route path={"/test"} component={Test}/>
+            <Route path={"/houseinfo"} component={HouseInfo}/>
+            <Route path={"/housefile"} component={HouseFile}/>
+            <Route path={"/device"} component={Device}/>
+            </Switch>
+        </div>
+      </Router>
     );
   }
 }
