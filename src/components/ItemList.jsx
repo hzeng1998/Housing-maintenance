@@ -7,11 +7,12 @@ import Item from './Item'
 const styles = theme => ({
     list: {
       width: '90%',
+      height: '100%',
       maxWidth: 560,
       margin: '0 auto',
       marginTop: theme.spacing.unit * 3,
       marginBottom: theme.spacing.unit * 1,
-      backgroundColor: theme.palette.background.paper,
+      background: '#fafafa',
     },
 });
 

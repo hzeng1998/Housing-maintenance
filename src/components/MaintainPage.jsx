@@ -1,8 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import GridMenu from './Maintain/GridMenu'
-import BuildIcon from '@material-ui/icons/Build';
-import Typography from '@material-ui/core/Typography'
+import GridMenu from './Maintain/GridMenu';
 
 const styles = theme => ({
     container: {

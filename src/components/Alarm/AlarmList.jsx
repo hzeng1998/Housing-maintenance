@@ -2,11 +2,11 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography'
-import List from '@material-ui/core/List';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import ItemList from '../ItemList';
 import grey from '@material-ui/core/colors/grey';
+import TopBar from '../TopBar';
 
 const styles = theme => ({
     container: {
@@ -36,9 +36,7 @@ class AlarmList extends React.Component {
         const {classes} = this.props;
         return(
             <div className={classes.container}>
-                <div className={classes.title}>
-                    <h3>alarm</h3>
-                </div>
+                <TopBar title='Alarm'/>
                 <ItemList items={alarms}/>
                 <Link to='/house/alarm/set'>
                 <Fab size= "small" aria-label="Add Alarm" className={classes.fab}>

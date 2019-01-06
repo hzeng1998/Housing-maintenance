@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import grey from '@material-ui/core/colors/grey';
 import List from '@material-ui/core/List';
 import SupplierItem from './SupplierItem';
+import SearchBar from '../SearchBar';
 
 const styles = theme => ({
     container: {
@@ -13,14 +14,17 @@ const styles = theme => ({
     },
     title: {
         paddingTop: theme.spacing.unit * 2,
-        marginBottom: theme.spacing.unit * 2,
+        paddingBottom: theme.spacing.unit * 3,
+        marginBottom: theme.spacing.unit * 3,
+        borderRadius: 10,
         width: '100%',
-        color: '#bdbdbd'
-        // boxShadow: '0px 2px 20px 0px rgba(180,180,180,0.6)',
+        color: '#ffffff',
+        background: 'linear-gradient(to top right, #8E9BFF 0%, #D16DE4 100%)',
+        boxShadow: '0px 5px 15px 0px rgba(180,180,180,0.6)',
     },
     fab: {
         marginTop: theme.spacing.unit * 8,
-    }
+    },
 
 });
 
@@ -36,12 +40,12 @@ class SupplierList extends React.Component {
         return(
             <div className={classes.container}>
                 <div className={classes.title}>
-                    <h3>Maintain Service</h3>
+                    <h4>Maintain Service Provider</h4>
                 </div>
                 <div>
                 <List className={classes.list}>
-                    { suppliers.map( (item, index) =>
-                        <SupplierItem key={index} content={item} Component={Link} to='/house/maintain/supplier?id={item.id}' />
+                    { suppliers.map( (item) =>
+                        <SupplierItem key={item.id} content={item} />
                     )}
                 </List>
                 </div>

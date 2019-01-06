@@ -69,10 +69,14 @@ function GridMenu(props) {
 							</CardActionArea>
             </Grid>
             <Grid item xs={4}>
-							<CardActionArea component={Link} to="/house/maintain/supplier_list" className={classes.block}>
+						<Link to='/house/maintain/supplier_list'>
+							<CardActionArea  className={classes.block}>
 								<WallIcon className={classes.icon}/>
-								<Typography className={classes.text} >wallpaper</Typography>
+								<Typography className={classes.text} >
+									wallpaper
+								</Typography>
 							</CardActionArea>
+							</Link>
             </Grid>
             <Grid item xs={4}>
 							<CardActionArea className={classes.block}>

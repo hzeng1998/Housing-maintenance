@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
@@ -22,12 +23,15 @@ const styles = theme => ({
 function Item(props) {
     const {classes, content} = props;
     return (
-      <ListItem button className={classes.listItem} >
+      <Link to='/house/maintain/supplier_info'>
+        <ListItem button className={classes.listItem}>
         <Avatar className={classes.avatar}>
           <ShopIcon />
         </Avatar>
         <ListItemText primary={content.name} secondary={"Rating: " + content.star} />
       </ListItem>
+      </Link>
+      
     )
 }
 
