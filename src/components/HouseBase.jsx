@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import BottomNav from './BottomNav'
 import HomePage from './HomePage'
 import MaintainPage from './MaintainPage'
@@ -7,6 +7,7 @@ import SetAlarm from './Alarm/SetAlarm'
 import AlarmList from './Alarm/AlarmList';
 import ManagePage from './ManagePage';
 import SupplierList from './Maintain/SupplierList';
+import ManageDevice from "../page/ManageDevice";
 
 class HouseBase extends React.Component {
     render() {
@@ -19,6 +20,7 @@ class HouseBase extends React.Component {
                     <Route exact path='/house/alarm' component={AlarmList} />
                     <Route exact path='/house/alarm/set' component={SetAlarm} />
                     <Route exact path='/house/manage' component={ManagePage} />
+                  <Route exact path={"/house/manage/devices"} component={ManageDevice}/>
                 </Switch>
                 <BottomNav />
             </div>
