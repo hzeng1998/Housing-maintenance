@@ -7,10 +7,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import CameraAlt from '@material-ui/icons/CameraAlt';
 import Typography from '@material-ui/core/Typography';
 import {withStyles, MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
-import deepPurple from '@material-ui/core/colors/deepPurple';
 import purple from '@material-ui/core/colors/purple';
 import Grid from '@material-ui/core/Grid';
 import Avatar from "@material-ui/core/Avatar";
+import Snackbar from "./Login";
 
 const styles = theme => ({
   main: {
@@ -58,6 +58,12 @@ const styles = theme => ({
       boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
     },
   },
+  snackbar: {
+    position: 'absolute',
+  },
+  snackbarContent: {
+    width: 360,
+  },
 });
 
 const theme = createMuiTheme({
@@ -71,10 +77,14 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Name: '',
-      Password: '',
-      CheckPassword: '',
-      Phone: '',
+      Name: null,
+      Password: null,
+      CheckPassword: null,
+      Phone: null,
+      file: null,
+      open: false,
+      msg: "",
+      status: false,
     };
     this.inputRef = React.createRef();
     this.classes = props;
@@ -93,16 +103,56 @@ class Register extends React.Component {
     });
   };
 
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   handleSubmit(event) {
-    console.log('A name was submitted: ' + this.state.HouseName);
-    event.preventDefault();
+
+    if (this.state.Name && this.state.Password && this.state.CheckPassword && this.state.Phone && this.state.file) {
+
+      let {HouseName, Password, Phone, CheckPassword, file} = this.state;
+
+      if (Password !== CheckPassword) {
+        this.setState({open: true, msg: "The Repetitive Password is Not Match"});
+        return;
+      }
+
+      let data = new FormData();
+      data.append("File", file);
+      data.append("Password", Password);
+      data.append("HouseName", HouseName);
+      data.append("Phone", Phone);
+
+      const opts = {
+        method: "POST",
+        body: data,
+        mode: 'cors',
+      };
+
+      fetch("/user_profile", opts)
+        .then((res) => res.json())
+        .then((data) => {
+          data.status || this.setState({open: true, msg: "Register Succeed, Please Log In"});
+          setTimeout(() => this.setState({status: true}));
+        })
+        .catch(e => {
+        console.log(e);
+        });
+
+      event.preventDefault();
+    } else {
+      this.setState({open: true, msg: "Please Complete All of the Required Information"});
+    }
+
   }
-  uploadImage() {
-    console.log("upload file");
-  }
+  uploadImage = (e) => {
+    console.log("upload file "+ e.target.value);
+    this.setState({"file": e.target.value});
+  };
 
   render() {
-    const {classes} = this.classes;
+    const {classes, open, msg} = this.classes;
     return (
       <main className={classes.main}>
 
@@ -156,12 +206,12 @@ class Register extends React.Component {
               </FormControl>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="Password">Password</InputLabel>
-                <Input id="Password" name="Password" value={this.state.Password} onChange={this.handleChange("Password")}
+                <Input type="password" id="Password" name="Password" value={this.state.Password} onChange={this.handleChange("Password")}
                        autoComplete="new-password"/>
               </FormControl>
               <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="CheckPassword">Password</InputLabel>
-                <Input id="CheckPassword" name="CheckPassword" value={this.state.CheckPassword}
+                <InputLabel htmlFor="CheckPassword">Repeat Password</InputLabel>
+                <Input type="password" id="CheckPassword" name="CheckPassword" value={this.state.CheckPassword}
                        onChange={this.handleChange("CheckPassword")} autoComplete="new-password"/>
               </FormControl>
               <FormControl margin="normal" required fullWidth>
@@ -182,6 +232,24 @@ class Register extends React.Component {
               Submit
             </Button>
           </form>
+
+          <Snackbar
+            open={open}
+            autoHideDuration={4000}
+            onClose={this.handleClose}
+            ContentProps={{
+              'aria-describedby': 'snackbar-fab-message-id',
+              className: classes.snackbarContent,
+            }}
+            message={<span id="snackbar-fab-message-id">{msg}</span>}
+            action={
+              <Button color="inherit" size="small" onClick={this.handleClose}>
+                Undo
+              </Button>
+            }
+            className={classes.snackbar}
+          />
+
         </div>
       </main>
     );

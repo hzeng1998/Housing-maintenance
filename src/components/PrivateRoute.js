@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
 import {Route, Redirect} from "react-router-dom";
+import "../App.css";
 
 const PrivateRoute = ({component: Component, ...rest}) => (
   <Route {...rest} render={

@@ -26,14 +26,14 @@ class App extends Component {
             <Route exact path={"/"} component={Home}/>
             <Route path={"/login"} component={Login}/>
             <Route path={"/signup"} component={SignInStart}/>
-            <PrivateRoute path={"/addhouse"} component={AddHouse}/>
             <Route path={"/register/:email"} component={Register}/>
-            <PrivateRoute path={"/houseinfo"} component={HouseInfo}/>
-            <PrivateRoute path={"/housefile"} component={HouseFile}/>
-            <PrivateRoute path={"/device"} component={Device}/>
-            <PrivateRoute exact path={"/setting/result"} component={SettingResult}/>
-            <PrivateRoute path={"/house"} component={HouseBase}/>
-            <PrivateRoute path={"/warranty/result"} component={WarrantyResult}/>
+            <Route path={"/addhouse"} component={AddHouse}/>
+            <Route path={"/houseinfo"} component={HouseInfo}/>
+            <Route path={"/housefile"} component={HouseFile}/>
+            <Route path={"/device"} component={Device}/>
+            <Route path={"/house"} component={HouseBase}/>
+            <Route path={"/warranty/result"} component={WarrantyResult}/>
+            <Route exact path={"/setting/result"} component={SettingResult}/>
           </Switch>
         </div>
       </Router>

@@ -111,8 +111,8 @@ class Login extends React.Component {
 
   render() {
     const {classes} = this.props;
-    const {from} = this.props.location.state || {from: {pathname: "/"}};
-    const {open} = this.state;
+    const {from} = this.props.location.state || {from: {pathname: "/house"}};
+    const {open, msg} = this.state;
 
     if (this.state.logged) {
       return <Redirect to={from}/>
@@ -157,7 +157,7 @@ class Login extends React.Component {
               'aria-describedby': 'snackbar-fab-message-id',
               className: classes.snackbarContent,
             }}
-            message={<span id="snackbar-fab-message-id">Archived</span>}
+            message={<span id="snackbar-fab-message-id">{msg}</span>}
             action={
               <Button color="inherit" size="small" onClick={this.handleClose}>
                 Undo
