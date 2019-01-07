@@ -8,6 +8,8 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import withStyles from '@material-ui/core/styles/withStyles';
 import logoURL from "../static/image/LOGO.png";
+import {Redirect} from "react-router-dom";
+import Snackbar from "@material-ui/core/Snackbar";
 
 const styles = theme => ({
   main: {
@@ -47,43 +49,126 @@ const styles = theme => ({
     marginTop: "20%",
     textAlign: "center",
   },
+  snackbar: {
+    position: 'absolute',
+  },
+  snackbarContent: {
+    width: 360,
+  },
 });
 
-function Login(props) {
-  const { classes } = props;
+class Login extends React.Component {
 
-  return (
-    <main className={classes.main}>
-      <div className={classes.logo}>
-        <img src={logoURL} alt="logo" width={'100%'} height={'auto'}/>
-      </div>
-      <div className={classes.paper}>
-        <form className={classes.form}>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
-          </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input name="password" type="password" id="password" autoComplete="current-password" />
-          </FormControl>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      msg: "",
+      password: "",
+      user_account: "",
+      logged:"",
+      remembered: false,
+    }
+  }
+
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  authorise = (e) => {
+
+    let opts = {
+      method: "POST",
+      body: JSON.stringify({user_account: `${this.state.user_account}`, password: `${this.state.password}`}),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    };
+
+    fetch("/session", opts)
+      .then(res => {
+        return res.json();
+      })
+      .then(status => {
+        if (status.logged) {
+          this.setState({auth: status.logged});
+          sessionStorage.setItem('__content_token', status.token);
+          console.log(status);
+        } else
+          this.setState({open: true, msg: "ERROR incorrect user account or password"});
+      })
+      .catch(err => console.log(err));
+
+    e.preventDefault();
+  };
+
+  render() {
+    const {classes} = this.props;
+    const {from} = this.props.location.state || {from: {pathname: "/"}};
+    const {open} = this.state;
+
+    if (this.state.logged) {
+      return <Redirect to={from}/>
+    }
+
+    return (
+
+      <main className={classes.main}>
+        <div className={classes.logo}>
+          <img src={logoURL} alt="logo" width={'100%'} height={'auto'}/>
+        </div>
+        <div className={classes.paper}>
+          <form className={classes.form} onSubmit={this.authorise}>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="email">Email Address</InputLabel>
+              <Input id="email" name="email" autoComplete="email" autoFocus onChange={this.handleChange("email")}/>
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <Input name="password" type="password" id="password" autoComplete="current-password" onChange={this.handleChange("password")}/>
+            </FormControl>
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" onChange={(e) => this.setState({"remembered": e.target.value})}/>}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              {"Log in"}
+            </Button>
+          </form>
+
+          <Snackbar
+            open={open}
+            autoHideDuration={4000}
+            onClose={this.handleClose}
+            ContentProps={{
+              'aria-describedby': 'snackbar-fab-message-id',
+              className: classes.snackbarContent,
+            }}
+            message={<span id="snackbar-fab-message-id">Archived</span>}
+            action={
+              <Button color="inherit" size="small" onClick={this.handleClose}>
+                Undo
+              </Button>
+            }
+            className={classes.snackbar}
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            {"Log in"}
-          </Button>
-        </form>
-      </div>
-    </main>
-  );
+        </div>
+      </main>
+    );
+  }
 }
 
 Login.propTypes = {

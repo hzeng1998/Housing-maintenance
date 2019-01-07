@@ -1,0 +1,11 @@
+/session
+->
+{
+"user_account" : "",
+"password": "",
+}
+<-
+{
+"logged": true/false,
+"token":"",
+}
