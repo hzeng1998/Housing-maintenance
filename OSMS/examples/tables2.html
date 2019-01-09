@@ -18,6 +18,16 @@
   <link href="../assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../assets/demo/demo.css" rel="stylesheet" />
+
+  <link rel="stylesheet"
+        href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+  <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+          crossorigin="anonymous"></script>
 </head>
 
 <body class="">
@@ -25,8 +35,8 @@
     <div class="sidebar">
       <div class="sidebar-wrapper">
         <div class="logo">
-          <a href="javascript:void(0)" class="simple-text logo-normal" herf="./dashboard.html">
-            <img src =  "../assets/img/logo.png" />
+          <a href="javascript:void(0)" class="simple-text logo-normal">
+            <img src =  "../assets/img/logo.png" src="dashboard.html" />
           </a>
         </div>
         <ul class="nav">
@@ -42,13 +52,13 @@
               <p>Order List</p>
             </a>
           </li>
-          <li>
+          <li class="active ">
             <a href="./tables2.html">
               <i class="tim-icons icon-badge"></i>
               <p>Employee List</p>
             </a>
           </li>
-          <li class="active ">
+          <li>
             <a href="./map.html">
               <i class="tim-icons icon-square-pin"></i>
               <p>Overview Map</p>
@@ -162,15 +172,183 @@
         </div>
       </div>
       <!-- End Navbar -->
-      <div class="content">
+      <div class = "content" >
         <div class="row">
           <div class="col-md-12">
-            <div class="card card-plain">
+            <div class="card ">
               <div class="card-header">
-                Overview Map
+                <h4 class="card-title"> Employee List </h4>
+                <!--<p class="category"> Here is a subtitle for this table</p>-->
               </div>
               <div class="card-body">
-                <div id="map" class="map"></div>
+                <div class="table-responsive">
+                  <table class="table tablesorter " id="">
+                    <thead class=" text-primary">
+                    <tr>
+                      <th>
+                        Order Type
+                      </th>
+                      <th>
+                        Repairman Name
+                      </th>
+                      <th>
+                        Work Type
+                      </th>
+                      <th class="text-center">
+                        Phone Number
+                      </th>
+                      <th>
+
+                      </th>
+                      <th>
+
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>
+                        Wooden Furniture
+                      </td>
+                      <td>
+                        Dizzert Wei
+                      </td>
+                      <td>
+                        Pipieline Maintance
+                      </td>
+                      <td class="text-center">
+                        18868123456
+                      </td>
+                      <td align = "center">
+                        <button type="button" class="btn btn-fill btn-primary"> Working Detail </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-fill btn-primary"> Arrange Wrok </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Pipe
+                      </td>
+                      <td>
+                        Zhengzhe Fu
+                      </td>
+                      <td>
+                        Refrigerator Repair
+                      </td>
+                      <td class="text-center">
+                        18868123457
+                      </td>
+                      <td align = "center">
+                        <button type="button" class="btn btn-fill btn-primary"> Working Detail </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-fill btn-primary"> Arrange Wrok </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Water Pipe
+                      </td>
+                      <td>
+                        Haoran Cheng
+                      </td>
+                      <td>
+                        Roof Maintenance
+                      </td>
+                      <td class="text-center">
+                        18868123458
+                      </td>
+                      <td align = "center">
+                        <button type="button" class="btn btn-fill btn-primary"> Working Detail </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-fill btn-primary"> Arrange Wrok </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Glass
+                      </td>
+                      <td>
+                        Hzeng
+                      </td>
+                      <td>
+                        Computer Repair
+                      </td>
+                      <td class="text-center">
+                        18868123466
+                      </td>
+                      <td align = "center">
+                        <button type="button" class="btn btn-fill btn-primary"> Working Detail </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-fill btn-primary"> Arrange Wrok </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Wooden Furniture
+                      </td>
+                      <td>
+                        Handan Hu
+                      </td>
+                      <td>
+                        Furniture Maintenance
+                      </td>
+                      <td class="text-center">
+                        18868234567
+                      </td>
+                      <td align = "center">
+                        <button type="button" class="btn btn-fill btn-primary"> Working Detail </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-fill btn-primary"> Arrange Wrok </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Pipe
+                      </td>
+                      <td>
+                        Tom Song
+                      </td>
+                      <td>
+                        Pipline Maintenance
+                      </td>
+                      <td class="text-center">
+                        18868234568
+                      </td>
+                      <td align = "center">
+                        <button type="button" class="btn btn-fill btn-primary"> Working Detail </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-fill btn-primary"> Arrange Wrok </button>
+                      </td>
+                    <tr>
+                      <td>
+                        Wooden Furniture
+                      </td>
+                      <td>
+                        Jack Chen
+                      </td>
+                      <td>
+                        Roof Maintenance
+                      </td>
+                      <td class="text-center">
+                        18868345678
+                      </td>
+                      <td align = "center">
+                        <button type="button" class="btn btn-fill btn-primary"> Working Detail </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-fill btn-primary"> Arrange Wrok </button>
+                      </td>
+                    </tr>
+
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -194,6 +372,35 @@
           </div>
         </div>
       </footer>
+    </div>
+      <!--<footer class="footer">-->
+        <!--<div class="container-fluid">-->
+          <!--<ul class="nav">-->
+            <!--<li class="nav-item">-->
+              <!--<a href="javascript:void(0)" class="nav-link">-->
+                <!--Creative Tim-->
+              <!--</a>-->
+            <!--</li>-->
+            <!--<li class="nav-item">-->
+              <!--<a href="javascript:void(0)" class="nav-link">-->
+                <!--About Us-->
+              <!--</a>-->
+            <!--</li>-->
+            <!--<li class="nav-item">-->
+              <!--<a href="javascript:void(0)" class="nav-link">-->
+                <!--Blog-->
+              <!--</a>-->
+            <!--</li>-->
+          <!--</ul>-->
+          <!--<div class="copyright">-->
+            <!--©-->
+            <!--<script>-->
+              <!--document.write(new Date().getFullYear())-->
+            <!--</script> made with <i class="tim-icons icon-heart-2"></i> by-->
+            <!--<a href="javascript:void(0)" target="_blank">Creative Tim</a> for a better web.-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</footer>-->
     </div>
   </div>
   <div class="fixed-plugin">
@@ -219,10 +426,11 @@
           <span class="badge dark-badge ml-2"></span>
           <span class="color-label">DARK MODE</span>
         </li>
-
+        </li>
       </ul>
     </div>
   </div>
+
   <!--   Core JS Files   -->
   <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
@@ -348,12 +556,6 @@
           $('body').removeClass('white-content');
         });
       });
-    });
-  </script>
-  <script>
-    $(document).ready(function() {
-      // Javascript method's body can be found in assets/js/demos.js
-      demo.initGoogleMaps();
     });
   </script>
 </body>

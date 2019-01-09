@@ -360,7 +360,7 @@ demo = {
     var data = {
       labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
       datasets: [{
-        label: "Data",
+        label: "Satisfy Rate",
         fill: true,
         backgroundColor: gradientStroke,
         borderColor: '#d048b6',
@@ -396,7 +396,7 @@ demo = {
     var data = {
       labels: ['AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
       datasets: [{
-        label: "My First dataset",
+        label: "Completed Tasks",
         fill: true,
         backgroundColor: gradientStroke,
         borderColor: '#00d6b4',
@@ -439,7 +439,7 @@ demo = {
       data: {
         labels: chart_labels,
         datasets: [{
-          label: "My First dataset",
+          label: "Monthly Store Income",
           fill: true,
           backgroundColor: gradientStroke,
           borderColor: '#d346b1',
@@ -507,7 +507,7 @@ demo = {
       data: {
         labels: ['MAH', 'BRX', 'QUE', 'BKL'],
         datasets: [{
-          label: "Countries",
+          label: "Daily Sales",
           fill: true,
           backgroundColor: gradientStroke,
           hoverBackgroundColor: gradientStroke,
