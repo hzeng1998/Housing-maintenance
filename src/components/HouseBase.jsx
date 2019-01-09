@@ -12,7 +12,7 @@ import DeviceType from './DeviceType';
 import OrderForm from  './Maintain/OrderForm';
 import OrderList from './OrderList';
 import DeviceList from './DeviceList';
-import SelectDevice from './Maintain/SelectDevice';
+import SelectDevice from './Alarm/SelectDevice';
 
 class HouseBase extends React.Component {
     render() {
@@ -25,6 +25,7 @@ class HouseBase extends React.Component {
                     <Route exact path='/house/maintain/supplier_info' component={SupplierInfo} />
                     <Route exact path='/house/maintain/order' component={OrderForm}/>
                     <Route exact path='/house/alarm' component={AlarmList} />
+                    <Route exact path='/house/alarm/select_device' component={SelectDevice} />
                     <Route exact path='/house/alarm/set' component={SetAlarm} />
                     <Route exact path='/house/manage' component={ManagePage} />
                     <Route exact path={"/house/device_type"} component={DeviceType}/>

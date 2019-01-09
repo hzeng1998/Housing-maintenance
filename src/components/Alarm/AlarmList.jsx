@@ -60,7 +60,7 @@ class AlarmList extends React.Component {
             <div className={classes.container}>
                 <TopBar title='Alarm'/>
                 <ItemList items={this.state.alarms} listType="alarm"/>
-                <Link to='/house/alarm/set'>
+                <Link to='/house/alarm/select_device'>
                 <Fab size= "small" aria-label="Add Alarm" className={classes.fab}>
                     <AddIcon />
                 </Fab>

@@ -24,6 +24,16 @@ const styles = theme => ({
 
 });
 
+
+function actionPath(action) {
+    if(action == "maintain")
+        return "/house/maintain/supplier_list";
+    else if(action == "alarm")
+        return "/house/alarm/set";
+    else
+        return "/show_device";
+}
+
 class DeviceList extends React.Component {
 
     constructor(props) {
@@ -74,6 +84,7 @@ class DeviceList extends React.Component {
         const devices = this.state.devices || [];
         const {open, msg} = this.state;
         console.log(this.props.location.state.category);
+        const nextJump = actionPath(this.props.location.state.action);
 
         return(
           <div className={classes.container}>
@@ -91,7 +102,8 @@ class DeviceList extends React.Component {
                               "detail": device.Brand,
                           };})}
                   listType={"device"}
-                  use={this.props.location.state.action === "maintain" ? "/house/maintain/supplier_list" : "/show_device"}/> : ""}
+                  use={nextJump}/> : ""}
+                                
               <Fab size= "small" aria-label="Add" className={classes.fab}>
                   <Link to={
                       {
