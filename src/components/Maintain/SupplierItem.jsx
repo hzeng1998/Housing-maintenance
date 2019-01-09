@@ -24,7 +24,7 @@ function Item(props) {
     const {classes, content, values} = props;
     return (
       <Link to={{pathname: '/house/maintain/supplier_info', 
-      state: {values: {values}, supplier: {content}
+      state: {device: {values}, supplier: {content}
       }}}>
         <ListItem button className={classes.listItem}>
         <Avatar className={classes.avatar}>

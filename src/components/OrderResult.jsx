@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/es/Typography/Typography";
 import {Link} from "react-router-dom";
-import WarrantyTitle from "../components/WarrantyTitle";
+import WarrantyTitle from "./WarrantyTitle";
 
 const styles = theme => ({
   container: {
@@ -17,7 +17,7 @@ const styles = theme => ({
 });
 
 
-function SettingResult(props) {
+function OrderResult(props) {
   const {classes} = props;
 
   return (
@@ -33,14 +33,14 @@ function SettingResult(props) {
         color:"white",
         marginTop: "30%",
         marginBottom: "30%",
-      }} variant={"subtitle1"}><Link to={"/house/orders"}>Turn to the order list ></Link></Typography>
+      }} variant={"subtitle1"}><Link to={"/house"}>Turn to home ></Link></Typography>
     </div>
   );
 }
 
 
-SettingResult.propTypes = {
+OrderResult.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SettingResult);
+export default withStyles(styles)(OrderResult);

@@ -12,7 +12,7 @@ import HouseFile from "./page/HouseFile";
 import Device from "./page/Device";
 import HouseBase from './components/HouseBase';
 import SettingResult from "./page/SettingResult";
-import WarrantyResult from "./page/WarrantyResult";
+import OrderResult from "./components/OrderResult";
 import PrivateRoute from "./components/PrivateRoute";
 
 class App extends Component {
@@ -32,7 +32,7 @@ class App extends Component {
             <Route path={"/housefile"} component={HouseFile}/>
             <Route path={"/device"} component={Device}/>
             <Route path={"/house"} component={HouseBase}/>
-            <Route path={"/warranty/result"} component={WarrantyResult}/>
+            <Route path={"/house/maintain/result"} component={OrderResult}/>
             <Route exact path={"/setting/result"} component={SettingResult}/>
           </Switch>
         </div>

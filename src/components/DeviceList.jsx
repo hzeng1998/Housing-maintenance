@@ -25,9 +25,8 @@ const styles = theme => ({
 });
 
 const devices = [
-    {title: "Dinning Table", brand: "IKEA 2016",},
-    {title: "Bedroom Closet", brand: "Houzz 2018"},
-    
+    {id: '1024', title: "Dinning Table", brand: "IKEA 2016",},
+    {id: '2483', title: "Bedroom Closet", brand: "Houzz 2018"},
 ]
 
 class DeviceList extends React.Component {
@@ -48,7 +47,7 @@ class DeviceList extends React.Component {
                 </div>
                 <List className={classes.list}>
                     { devices.map( (device, index) =>
-                    <Item key={index} content={device} use="maintain" type="device" category={category}/>
+                    <Item key={index} content={{"id": device.id, "title": device.title, "detail": device.brand}} use="maintain" type="device" category={category}/>
                     )}
                 </List>
                

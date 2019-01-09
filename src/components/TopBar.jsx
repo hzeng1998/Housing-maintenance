@@ -11,7 +11,7 @@ const styles = theme => ({
         paddingTop: theme.spacing.unit * 2,
         marginBottom: theme.spacing.unit * 2,
         width: '100%',
-        color: '#bdbdbd'
+        color: '#9e9e9e'
         // boxShadow: '0px 2px 20px 0px rgba(180,180,180,0.6)',
     },
 });

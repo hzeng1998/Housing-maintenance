@@ -10,6 +10,8 @@ import { Link } from 'react-router-dom';
 
 const styles = theme => ({
     listItem: {
+      width: "90%",
+      margin: "0 auto",
       borderRadius: 8,
       boxShadow: '0px 2px 30px 0px rgba(180,180,180,0.6)',
       marginBottom: 15,
@@ -35,7 +37,7 @@ class Item extends React.Component {
   }
   render() {
     const {classes, content, type, use} = this.props;
-    const keys = Object.values(content);
+    //const keys = Object.values(content);
     return (
       <Link to={{
         pathname: paths[use],
@@ -45,7 +47,7 @@ class Item extends React.Component {
         <Avatar className={classes.avatar}>
          {icons[type]}
         </Avatar>
-        <ListItemText primary={keys[0]} secondary={keys[1]} />
+        <ListItemText primary={content.title} secondary={content.detail} />
       </ListItem>
       </Link>
     )

@@ -6,7 +6,7 @@ import Item from './Item'
 
 const styles = theme => ({
     list: {
-      width: '90%',
+      width: '100%',
       height: '100%',
       maxWidth: 560,
       margin: '0 auto',
