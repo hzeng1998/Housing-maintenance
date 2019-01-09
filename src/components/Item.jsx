@@ -24,31 +24,28 @@ const styles = theme => ({
 const icons = {
   "alarm": <ClockIcon />,
   "order": <OrderIcon />,
-  "device": <DeviceIcon />,
-}
-
-const paths = {
-  "maintain": "/house/maintain/supplier_list",
-}
+  "device": "",
+  "house": "",
+};
 
 class Item extends React.Component {
   componentDidMount() {
-    //console.log("usage: " + this.props.use);
+    console.log("usage: " + this.props.use);
   }
   render() {
-    const {classes, content, type, use} = this.props;
-    //const keys = Object.values(content);
+    const {classes, content, type, jumpTo} = this.props;
+
     return (
       <Link to={{
-        pathname: paths[use],
+        pathname: jumpTo,
         state: {...this.props}
       }}>
-      <ListItem button className={classes.listItem} >
-        <Avatar className={classes.avatar}>
-         {icons[type]}
-        </Avatar>
-        <ListItemText primary={content.title} secondary={content.detail} />
-      </ListItem>
+        <ListItem button className={classes.listItem} >
+          <Avatar className={classes.avatar} src={(type === "house" || type === "device") ? content.img : ""}>
+            {icons[type]}
+          </Avatar>
+          <ListItemText primary={content.title} secondary={content.detail} />
+        </ListItem>
       </Link>
     )
   }

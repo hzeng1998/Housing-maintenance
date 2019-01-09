@@ -16,9 +16,6 @@ const styles = theme => ({
 
 
 class MaintainPage extends React.Component {
-    state={
-        nextPage: "/house/device_list"
-    }
     render() {
         const {classes} = this.props;
         return(
@@ -27,7 +24,7 @@ class MaintainPage extends React.Component {
                     <h3>Maintain</h3>
                     <p>Select the type of device you want to maintain</p>
                 </div>
-                <GridMenu link={this.state.nextPage}/>
+                <GridMenu link='/house/device_list' action="maintain"/>
             </div>
         );
     }

@@ -32,8 +32,7 @@ class GridType extends React.Component {
     state = {
         category: this.props.category,
         icon: this.props.icon,
-    }
-
+    };
     render() 
     {
         const {classes} = this.props;
@@ -42,7 +41,7 @@ class GridType extends React.Component {
             <Grid item xs={4}>
                 <Link to={{
                     pathname: "/house/device_list",
-                    state: {category: this.props.category}  //维修类型：wood/elctricity
+                    state: {category: this.props.category, action: this.props.action}  //维修类型：wood/elctricity
                 }}> 
                     <CardActionArea className={classes.block}>
                         {this.props.icon}

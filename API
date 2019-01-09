@@ -27,3 +27,41 @@ post /user_account
  "name":"",
  "house":[],
  }
+
+ post /house_profile
+ ->
+ FormData
+ HouseName Address file HouseArea
+ <-
+ {
+ status: true,
+ }
+
+post /houses_list
+->
+{
+"token":"",
+}
+<-
+{
+status:true,
+data: [
+{
+house_id:"",
+houseaddr:"",
+housearea:"",
+housename:"",
+houseimg:"",
+},{},{}
+
+]
+}
+
+post /device_profile
+->
+FormData
+Name Brand PurchaseTime MaintainTime File
+<-
+{
+status: true,
+}

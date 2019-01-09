@@ -9,11 +9,13 @@ import Register from "./page/Register";
 import AddHouse from "./page/AddHouse";
 import HouseInfo from "./page/HouseInfo";
 import HouseFile from "./page/HouseFile";
-import Device from "./page/Device";
+import AddDevice from "./page/AddDevice";
 import HouseBase from './components/HouseBase';
 import SettingResult from "./page/SettingResult";
 import OrderResult from "./components/OrderResult";
 import PrivateRoute from "./components/PrivateRoute";
+import HouseList from "./page/HouseList";
+import OrderList from "./components/OrderList";
 
 class App extends Component {
 
@@ -30,10 +32,12 @@ class App extends Component {
             <Route path={"/addhouse"} component={AddHouse}/>
             <Route path={"/houseinfo"} component={HouseInfo}/>
             <Route path={"/housefile"} component={HouseFile}/>
-            <Route path={"/device"} component={Device}/>
+            <Route path={"/adddevice"} component={AddDevice}/>
             <Route path={"/house"} component={HouseBase}/>
-            <Route path={"/house/maintain/result"} component={OrderResult}/>
-            <Route exact path={"/setting/result"} component={SettingResult}/>
+            <Route path={"/order_result"} component={OrderResult}/>
+            <Route exact path={"/setting_result"} component={SettingResult}/>
+            <Route path={"/houselist"} component={HouseList} />
+            <Route path={"/orderlist"} component={OrderList} />
           </Switch>
         </div>
       </Router>

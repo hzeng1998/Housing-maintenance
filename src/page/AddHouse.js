@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import {ArrowBack} from "@material-ui/icons";
 
 const styles = theme => ({
   main: {
@@ -40,6 +41,12 @@ const styles = theme => ({
     color: "white",
     marginTop: "0.5em",
     marginBottom:"0",
+  },
+  backIcon: {
+    float: "left",
+    marginLeft: theme.spacing.unit * 2,
+    marginTop: theme.spacing.unit * 2,
+    verticalAlign: "center",
   }
 });
 
@@ -48,6 +55,7 @@ function AddHouse(props) {
   const {classes} = props;
   return (
     <main className={classes.main}>
+      <ArrowBack className={classes.backIcon} onClick={props.history ? props.history.goBack: void(0)}/>
       <div className={classes.paper}>
         <div style={{textAlign: "left"}}>
           <Typography

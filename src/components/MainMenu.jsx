@@ -84,10 +84,10 @@ class MenuAppBar extends React.Component {
     auth: true,
     anchorEl: null,
     top: false,
-    selectedIndex: 1,
+    selectedIndex: 0,
     left: false,
     name: "",
-    house:[],
+    houses:["Please Add a House"],
     avatar: "",
     status: false,
   };
@@ -100,6 +100,7 @@ class MenuAppBar extends React.Component {
 
   handleClickListItem = event => {
     this.setState({ anchorEl: event.currentTarget });
+    sessionStorage.setItem("__current_house", this.state.houses[this.state.selectedIndex]);
   };
 
   handleMenuItemClick = (event, index) => {
@@ -127,8 +128,12 @@ class MenuAppBar extends React.Component {
       })
       .then(data => {
         if (data.status) {
-          this.setState(data);
-          console.log(data);
+          this.setState({...data.data, status: data.status});
+          if (! this.state.houses.length)
+            this.setState({houses: ["Please Add a House"]});
+          else {
+            sessionStorage.setItem("__current_house", this.state.houses[this.state.selectedIndex]);
+          }
         } else
           console.log("fetch error");
       })
@@ -142,8 +147,7 @@ class MenuAppBar extends React.Component {
     }
 
     const { classes } = this.props;
-    const { anchorEl } = this.state;
-    const options = this.state.house;
+    const { anchorEl, houses } = this.state;
 
     const sideList = (
 
@@ -159,13 +163,16 @@ class MenuAppBar extends React.Component {
           </Grid>
 
           {[['Profile', <AccountBox/>, "#"],
-            ['My Houses', <Home/>, ""],
-            ['My Order', <Receipt/>],
-            ['My Wallet', <AttachMoney/>]].map((item, index) => (
-            <ListItem button key={item[0]}>
-              <ListItemIcon>{item[1]}</ListItemIcon>
-              <ListItemText primary={item[0]} />
-            </ListItem>
+            ['My Houses', <Home/>, "/houselist"],
+            ['My Order', <Receipt/>, "/orderlist"],
+            ['My Wallet', <AttachMoney/>, "/wallet"]].map((item, index) => (
+            <Link key={item[0]} to={{pathname: item[2],
+              state: { "houses": houses }}}>
+              <ListItem button >
+                <ListItemIcon>{item[1]}</ListItemIcon>
+                <ListItemText primary={item[0]}/>
+              </ListItem>
+            </Link>
           ))}
         </List>
         <Divider />
@@ -213,11 +220,11 @@ class MenuAppBar extends React.Component {
                     aria-haspopup="true"
                     aria-controls="lock-menu"
                     onClick={this.handleClickListItem}>
-                                        <span className={classes.selectTitle}>
-                                            <center>
-                                                {options[this.state.selectedIndex]}
-                                            </center>
-                                        </span>
+                    <span className={classes.selectTitle}>
+                      <center>
+                        {houses[this.state.selectedIndex]}
+                      </center>
+                    </span>
                   </ListItem>
                 </List>
                 <center><Menu
@@ -226,7 +233,7 @@ class MenuAppBar extends React.Component {
                   onClose={this.handleClose}
                   className={classes.selectTitle}
                 >
-                  {options.map((option, index) => (
+                  {houses.map((option, index) => (
                     <MenuItem
                       key={option}
                       className={classes.menuItemFont}

@@ -37,7 +37,7 @@ const styles = theme => ({
     background: 'linear-gradient(to top right, #7D8DFB 0%, #B6ADFD 100%)',
   },
   form: {
-    borderbottom: '#9370db',
+    borderBottom: '#9370db',
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing.unit,
   },
@@ -86,7 +86,7 @@ class Register extends React.Component {
       open: false,
       msg: "",
       status: false,
-      Email: props.match.params.email.split("=")[1],
+      Email: props.match ? props.match.params.email.split("=")[1] : "",
       filepath: "",
     };
     this.inputRef = React.createRef();
@@ -135,8 +135,10 @@ class Register extends React.Component {
       fetch("/user_profile", opts)
         .then((res) => res.json())
         .then((data) => {
-          data.status || this.setState({open: true, msg: "Register Succeed, Please Log In"});
-          setTimeout(() => this.setState({status: true}), 1000);
+          if (data.status) {
+            this.setState({open: true, msg: "Register Succeed, Please Log In"});
+            setTimeout(() => this.setState({status: true}), 4000);
+          }
         })
         .catch(e => {
         console.log(e);
@@ -157,7 +159,9 @@ class Register extends React.Component {
   };
 
   render() {
-    const {classes, open, msg} = this.classes;
+    const {classes} = this.props;
+
+    const {msg, open} = this.state;
 
     const {from} = this.props.state || {from: {pathname: "/login"}};
 
@@ -200,7 +204,7 @@ class Register extends React.Component {
               </Avatar>
 
             </div>
-            <h5 style={{fontSize: 14, color: '#A9AEBE', marginLeft: 10}}>{this.state.file ? this.state.file.name : "this Add Profile Picture"}</h5>
+            <h5 style={{fontSize: 14, color: '#A9AEBE', marginLeft: 10}}>{this.state.file ? this.state.file.name : "Add Profile Picture"}</h5>
           </Grid>
 
           <Typography variant={"subtitle1"} style={{textAlign:"left", color:"grey", marginTop: "1em"}}>Register via your email to connect with you</Typography>
@@ -256,7 +260,7 @@ class Register extends React.Component {
             message={<span id="snackbar-fab-message-id">{msg}</span>}
             action={
               <Button color="inherit" size="small" onClick={this.handleClose}>
-                Undo
+                OK
               </Button>
             }
             className={classes.snackbar}

@@ -1,63 +1,116 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import withStyles from '@material-ui/core/styles/withStyles';
-import logoURL from "../static/image/LOGO.png";
-import {Redirect} from "react-router-dom";
-import Snackbar from "@material-ui/core/Snackbar";
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import ItemList from "../components/ItemList";
+import {Link} from "react-router-dom";
+import {Snackbar} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
-  main: {
-    width: 'auto',
-    display: 'block', // Fix IE 11 issue.
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 400,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
+  container: {
+    verticalAlign: 'middle',
   },
-  avatar: {
-    margin: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.main,
+  title: {
+    paddingTop: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 2,
+    color: '#aaaaaa',
+    width: '100%',
   },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing.unit,
-  },
-  submit: {
-    marginTop: theme.spacing.unit * 3,
-    background: 'linear-gradient(to top right, #7D8DFB 0%, #B6ADFD 100%)',
-    boxShadow: '4px 6px 16px 2px #888888',
-    height: '3.5em',
-  },
-  logo: {
-    marginBottom: "20%",
-    marginTop: "20%",
-    textAlign: "center",
-  },
-  snackbar: {
-    position: 'absolute',
-  },
-  snackbarContent: {
-    width: 360,
-  },
+  fab: {
+    marginTop: theme.spacing.unit * 10,
+  }
+
 });
 
 class HouseList extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      msg: "",
+      houses: [],
+    };
+  }
 
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  getHouseInfo = () => {
+
+    let opts = {
+      method: "post",
+      body: JSON.stringify({"token": sessionStorage.getItem("__content_token")}),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    };
+
+    fetch("/houses_list", opts)
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        if (data.status) {
+          this.setState({houses: data.data});
+          console.log(this.state.houses);
+        } else
+          console.log("fetch error");
+      })
+      .catch(err => console.log(err));
+
+  };
+
+  componentDidMount() {
+    this.getHouseInfo();
+  }
 
   render() {
-    return (
+    const {classes} = this.props;
+    const houses = this.state.houses || [];
+    const {open, msg} = this.state;
 
+    return(
+      <div className={classes.container}>
+        <div className={classes.title}>
+          <h3>Houses</h3>
+        </div>
+        {houses.length ?
+          <ItemList
+            items={
+              houses.map((house) => {
+                return {
+                  "img": house.house_img,
+                  "title": house.housename,
+                  "detail": house.houseaddr,
+                };})}
+            listType={"house"}
+            use={"/show_house"}/> : ""}
+        <Fab size= "small" aria-label="Add" className={classes.fab}>
+          <Link to={"/addhouse"}> <AddIcon /> </Link>
+        </Fab>
 
+        <Snackbar
+          open={open}
+          autoHideDuration={4000}
+          onClose={this.handleClose}
+          ContentProps={{
+            'aria-describedby': 'snackbar-fab-message-id',
+            className: classes.snackbarContent,
+          }}
+          message={<span id="snackbar-fab-message-id">{msg}</span>}
+          action={
+            <Button color="inherit" size="small" onClick={this.handleClose}>
+              {"OK"}
+            </Button>
+          }
+          className={classes.snackbar}
+        />
+      </div>
     );
   }
 }

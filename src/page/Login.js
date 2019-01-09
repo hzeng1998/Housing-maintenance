@@ -156,7 +156,7 @@ class Login extends React.Component {
             message={<span id="snackbar-fab-message-id">{msg}</span>}
             action={
               <Button color="inherit" size="small" onClick={this.handleClose}>
-                Undo
+                OK
               </Button>
             }
             className={classes.snackbar}

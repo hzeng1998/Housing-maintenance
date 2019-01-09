@@ -9,8 +9,8 @@ import {withStyles, MuiThemeProvider, createMuiTheme} from '@material-ui/core/st
 import purple from '@material-ui/core/colors/purple';
 import TopBar from '../TopBar';
 import TextField from '@material-ui/core/TextField';
-import OrderResult from '../OrderResult';
 import { Redirect } from 'react-router-dom';
+import Snackbar from "@material-ui/core/Snackbar";
 
 const styles = theme => ({
   main: {
@@ -57,7 +57,13 @@ const styles = theme => ({
     color: '#ffffff',
     background: 'linear-gradient(to top right, #8E9BFF 0%, #D16DE4 100%)',
     boxShadow: '0px 5px 15px 0px rgba(180,180,180,0.6)',
-},
+  },
+  snackbar: {
+    position: 'absolute',
+  },
+  snackbarContent: {
+    width: 360,
+  },
 });
 
 const theme = createMuiTheme({
@@ -76,6 +82,8 @@ class OrderForm extends React.Component {
       tel: '',
       info: this.props.location.state,
       res: false,
+      open: false,
+      msg: '',
     };
 
     this.classes = props;
@@ -87,6 +95,10 @@ class OrderForm extends React.Component {
     this.setState({
       [name]: event.target.value,
     });
+  };
+  
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   handleSubmit(event) {
@@ -111,27 +123,30 @@ class OrderForm extends React.Component {
       return res.json();
     }).then(res => {
       console.log(res);
-      if(res.status==="true")
+      if(res.status===true){
+        this.setState({
+          open: true,
+          msg: 'Submit order success!',
+        });
         setTimeout(() => {
           this.setState({res: true});
-        }, 3000);
+        }, 1000);
+      }    
     })
 
     console.log("Order submitted!");
     event.preventDefault();
-
-
   }
  
   render() {
     const {classes} = this.classes;
-    const {info} = this.state;
+    const {info, open, msg} = this.state;
     const supplier = info.supplier.content.name;
     const device = info.device.values.content;
     const deviceInfo = device.title + ' / ' + device.detail;
 
     if(this.state.res)
-      return <Redirect to='house/maintain/result' />;
+      return <Redirect to='/order_result' />;
 
     return (
       <main className={classes.main}>
@@ -176,6 +191,23 @@ class OrderForm extends React.Component {
               Submit
             </Button>
           </form>
+
+          <Snackbar
+            open={open}
+            autoHideDuration={4000}
+            onClose={this.handleClose}
+            ContentProps={{
+              'aria-describedby': 'snackbar-fab-message-id',
+              className: classes.snackbarContent,
+            }}
+            message={<span id="snackbar-fab-message-id">{msg}</span>}
+            action={
+              <Button color="inherit" size="small" onClick={this.handleClose}>
+                OK
+              </Button>
+            }
+            className={classes.snackbar}
+          />
         </div>
       </main>
     );

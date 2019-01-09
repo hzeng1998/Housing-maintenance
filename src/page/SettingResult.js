@@ -1,9 +1,6 @@
 import React from "react";
-import logoURL from "../static/image/LOGO.png";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import EventNote from "@material-ui/icons/EventNote";
-import Settings from "@material-ui/icons/Settings";
 import Typography from "@material-ui/core/es/Typography/Typography";
 import {Link} from "react-router-dom";
 import SettingTitle from "../components/SettingTitle";
@@ -25,7 +22,7 @@ function SettingResult(props) {
 
   return (
     <div className={classes.container}>
-      <SettingTitle/>
+      <SettingTitle history={props.history}/>
       <Typography style={{
         color:"white",
         marginTop: "30%",
