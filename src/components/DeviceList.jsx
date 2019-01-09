@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import ItemList from './ItemList';
-
+import List from '@material-ui/core/List';
+import Item from './Item';
 
 const styles = theme => ({
     container: {
@@ -31,22 +32,26 @@ const devices = [
 
 class DeviceList extends React.Component {
     state = {
-        //type: this.props.state.type,
+        
     }
-
     componentDidMount() {
-        console.log(this.state.type);
+        console.log(this.props.location.state.category);
     }
 
     render() {
         const {classes} = this.props;
-    
+        const category = this.props.location.state.category;
         return(
             <div className={classes.container}>
                 <div className={classes.title}>
                     <h3>Devices</h3>
                 </div>
-                <ItemList items={devices} listType="device"/>
+                <List className={classes.list}>
+                    { devices.map( (device, index) =>
+                    <Item key={index} content={device} use="maintain" type="device" category={category}/>
+                    )}
+                </List>
+               
                 {/* <Link to='/house/alarm/set'> */}
                 <Fab size= "small" aria-label="Add" className={classes.fab}>
                     <AddIcon />

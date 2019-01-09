@@ -24,7 +24,6 @@ class HouseBase extends React.Component {
                     <Route exact path='/house/maintain/supplier_list' component={SupplierList} />
                     <Route exact path='/house/maintain/supplier_info' component={SupplierInfo} />
                     <Route exact path='/house/maintain/order' component={OrderForm}/>
-                    <Route exact path='/house/maintain/select_device' component={SelectDevice}/>
                     <Route exact path='/house/alarm' component={AlarmList} />
                     <Route exact path='/house/alarm/set' component={SetAlarm} />
                     <Route exact path='/house/manage' component={ManagePage} />

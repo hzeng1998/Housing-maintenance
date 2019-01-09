@@ -32,9 +32,17 @@ const styles = (theme) =>({
 });
 
 class SupplierInfo extends React.Component {
+  state = {
+    info: this.props.location.state,
+  }
+
+  componentDidMount() {
+    console.log(this.props.location.state);
+  }
+  
   render()
   {
-      const {classes} = this.props;
+    const {classes} = this.props;
     return (
       <div>
         <TopBar title="Supplier Info"/>
@@ -59,7 +67,7 @@ class SupplierInfo extends React.Component {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Link to="/house/maintain/order">
+            <Link to={{pathname: "/house/maintain/order", state: {...this.state.info}}}>
             <Button variant="contained" component="span" color="primary" className={classes.btn}>
               Order Now
             </Button>

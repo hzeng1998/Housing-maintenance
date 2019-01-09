@@ -22,12 +22,12 @@ class ItemList extends React.Component {
   }
 
   render() {
-    const {classes, listType} = this.props;
+    const {classes, listType, use} = this.props;
     const {items} = this.state;
     return (
       <List className={classes.list}>
         { items.map( (item, index) =>
-            <Item key={index} content={item} type={listType}/>
+            <Item key={index} content={item} type={listType} jumpTo={use}/>
           )}
       </List>
     );
@@ -36,7 +36,7 @@ class ItemList extends React.Component {
 
 ItemList.propTypes = {
   classes: PropTypes.object.isRequired,
-  listType: PropTypes.string.isRequired,
+  listType: PropTypes.string.isRequired,  //type:alarm/device/order/house
 };
 
 export default withStyles(styles)(ItemList);

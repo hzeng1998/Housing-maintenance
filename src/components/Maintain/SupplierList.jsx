@@ -32,9 +32,13 @@ const suppliers = [
 ]
 
 class SupplierList extends React.Component {
-  
+    
+    componentDidMount() {
+        console.log(this.props.location.state);
+    }
     render() {
         const {classes} = this.props;
+        const values = this.props.location.state;
         return(
             <div className={classes.container}>
                 <div className={classes.title}>
@@ -43,7 +47,7 @@ class SupplierList extends React.Component {
                 <div>
                 <List className={classes.list}>
                     { suppliers.map( (item) =>
-                        <SupplierItem key={item.id} content={item} />
+                        <SupplierItem key={item.id} content={item} values={values}/>
                     )}
                 </List>
                 </div>

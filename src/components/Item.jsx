@@ -6,6 +6,7 @@ import Avatar from '@material-ui/core/Avatar';
 import ClockIcon from '@material-ui/icons/Schedule';
 import OrderIcon from '@material-ui/icons/MonetizationOn';
 import DeviceIcon from '@material-ui/icons/OfflineBolt';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
     listItem: {
@@ -24,17 +25,32 @@ const icons = {
   "device": <DeviceIcon />,
 }
 
-function Item(props) {
-    const {classes, content, type} = props;
+const paths = {
+  "maintain": "/house/maintain/supplier_list",
+}
+
+class Item extends React.Component {
+  componentDidMount() {
+    //console.log("usage: " + this.props.use);
+  }
+  render() {
+    const {classes, content, type, use} = this.props;
     const keys = Object.values(content);
     return (
+      <Link to={{
+        pathname: paths[use],
+        state: {...this.props}
+      }}>
       <ListItem button className={classes.listItem} >
         <Avatar className={classes.avatar}>
          {icons[type]}
         </Avatar>
         <ListItemText primary={keys[0]} secondary={keys[1]} />
       </ListItem>
+      </Link>
     )
+  }
+    
 }
 
 export default withStyles(styles)(Item);

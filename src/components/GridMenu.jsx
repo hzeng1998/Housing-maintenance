@@ -41,15 +41,15 @@ const styles = theme => ({
 });
 
 const grids = [
-	{ "type": "pipe", "icon":< BuildIcon/>,},
-	{ "type": "electricity", "icon":< FlashIcon/>,},
-	{ "type": "hardware", "icon":< TVIcon/>,},
-	{ "type": "wooden", "icon":< LightIcon/>,},
-	{ "type": "wallpaper", "icon":< WallIcon/>,},
-	{ "type": "building", "icon":< HomeIcon/>,},
-	{ "type": "kitchen", "icon":< FoodIcon/>,},
-	{ "type": "bathroom", "icon":< WaterIcon/>,},
-	{ "type": "others", "icon":< SetIcon/>,},
+	{ "type": "pipe", "icon":< BuildIcon fontSize='large'/>,},
+	{ "type": "electricity", "icon":< FlashIcon fontSize='large'/>,},
+	{ "type": "hardware", "icon":< TVIcon fontSize='large'/>,},
+	{ "type": "wallpaper", "icon":< WallIcon fontSize='large'/>,},
+	{ "type": "wooden", "icon":< LightIcon fontSize='large'/>,},
+	{ "type": "building", "icon":< HomeIcon fontSize='large'/>,},
+	{ "type": "kitchen", "icon":< FoodIcon fontSize='large'/>,},
+	{ "type": "bathroom", "icon":< WaterIcon fontSize='large'/>,},
+	{ "type": "others", "icon":< SetIcon fontSize='large'/>,},
 ]
 
 class GridMenu extends React.Component {
@@ -59,7 +59,7 @@ class GridMenu extends React.Component {
 			<div className={classes.root}>
 					<Grid container spacing={16}>
 					{ grids.map((grid, index) => 
-							<GridType key={index} type={grid.type} icon={grid.icon}/>
+							<GridType key={index} category={grid.type} icon={grid.icon}/>
 						)
 					}
 					</Grid>

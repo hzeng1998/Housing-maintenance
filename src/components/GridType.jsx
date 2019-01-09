@@ -30,23 +30,24 @@ const styles = theme => ({
 
 class GridType extends React.Component {
     state = {
-        type: this.props.type,
+        category: this.props.category,
         icon: this.props.icon,
     }
 
     render() 
     {
-        const {classes } = this.props;
+        const {classes} = this.props;
+       
         return (
             <Grid item xs={4}>
                 <Link to={{
                     pathname: "/house/device_list",
-                    state: {type: this.state.type}
+                    state: {category: this.props.category}  //维修类型：wood/elctricity
                 }}> 
                     <CardActionArea className={classes.block}>
-                        {this.state.icon}
+                        {this.props.icon}
                         <Typography className={classes.text}>
-                            {this.state.type}
+                            {this.props.category}
                         </Typography>
                     </CardActionArea>
                 </Link>

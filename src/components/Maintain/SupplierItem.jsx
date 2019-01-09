@@ -21,9 +21,11 @@ const styles = theme => ({
 
 
 function Item(props) {
-    const {classes, content} = props;
+    const {classes, content, values} = props;
     return (
-      <Link to='/house/maintain/supplier_info'>
+      <Link to={{pathname: '/house/maintain/supplier_info', 
+      state: {values: {values}, supplier: {content}
+      }}}>
         <ListItem button className={classes.listItem}>
         <Avatar className={classes.avatar}>
           <ShopIcon />

@@ -10,6 +10,7 @@ import {withStyles, MuiThemeProvider, createMuiTheme} from '@material-ui/core/st
 import purple from '@material-ui/core/colors/purple';
 import Grid from '@material-ui/core/Grid';
 import Avatar from "@material-ui/core/Avatar";
+import TopBar from '../TopBar';
 
 const styles = theme => ({
   main: {
@@ -70,10 +71,11 @@ class OrderForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Name: '',
-      Brand: '',
-      PurchaseTime: '',
+      detail: '',
+      time: '',
+      info: this.props.location.state,
     };
+
     this.inputRef = React.createRef();
     this.classes = props;
     this.handleChange = this.handleChange.bind(this);
@@ -95,72 +97,42 @@ class OrderForm extends React.Component {
     console.log('A name was submitted: ' + this.state.HouseName);
     event.preventDefault();
   }
-  uploadImage() {
-    console.log("upload file");
-  }
-
+ 
   render() {
     const {classes} = this.classes;
+    const {info} = this.state;
+    const supplier = info.supplier.content.name;
+    const device = info.values.values.content;
+    const deviceInfo = device.title + ',' + device.brand;
+
     return (
       <main className={classes.main}>
-
         <div className={classes.paper}>
-
-          <Grid container justify="flex-start">
-            <Typography
-              style={{
-                marginTop: theme.spacing.unit * 3,
-                fontSize: 26,
-                color: '#535D7E',
-                lineheight: 40,
-                justifyContent: 'flex-start'
-              }}
-              component="h1"
-              variant="h5">
-              Add devices
-            </Typography>
-          </Grid>
-
-          <input type="file" name="profileImage" onChange={this.uploadImage} style={{display:'none'}} ref={this.inputRef}/>
-
-          <Grid container style={{marginTop: 15}} justify="flex-start" alignItems="center">
-            <div
-              style={{
-                backgroundColor: '#fffff',
-                borderColor: '#B6ADFD',
-                boxShadow: '0 0 0 0.1rem rgba(0,123,255,.5)',
-                borderRadius: 40, padding: 5
-              }}
-              onClick={ this.chooseFile}>
-
-              <Avatar className={classes.avatar}>
-                <CameraAlt/>
-              </Avatar>
-
-            </div>
-            <h5 style={{fontSize: 14, color: '#A9AEBE', marginLeft: 10}}> Add Device Picture</h5>
-            </Grid>
-
-          <Typography variant={"subtitle1"} style={{textAlign:"left", color:"grey", marginTop: "1em"}}>Add device by entering basic information of the device</Typography>
-
+          <TopBar title="Order Form"/>
+          <Typography variant={"subtitle1"} style={{textAlign:"left", color:"grey", marginTop: "1em"}}>
+          Please fill in the form and submit your maintain order
+          </Typography>
+          <p> 
+            {deviceInfo} 
+            {supplier}
+          </p>
           <form className={classes.form}>
 
             <MuiThemeProvider theme={theme}>
-
               <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="Name">Name</InputLabel>
-                <Input id="Name" name="Name" value={this.state.Name} onChange={this.handleChange('HouseName')}
-                       autoComplete="Name" autoFocus/>
-              </FormControl>
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="Brand">Brand</InputLabel>
-                <Input id="Brand" name="Brand" value={this.state.Brand} onChange={this.handleChange("Brand")}
+                <InputLabel htmlFor="ProblemDescription">Problem Description</InputLabel>
+                <Input id="ProblemDescription" name="detail" value={this.state.Brand} onChange={this.handleChange("detail")}
                        autoComplete="Brand"/>
               </FormControl>
               <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="PurchaseTime">Purchase Time</InputLabel>
-                <Input id="PurchaseTime" name="Purchase Time" value={this.state.PurchaseTime}
-                       onChange={this.handleChange("PurchaseTime")} autoComplete="time"/>
+                <InputLabel htmlFor="AvailableTime">Available Time</InputLabel>
+                <Input id="AvailableTime" name="time" value={this.state.PurchaseTime}
+                       onChange={this.handleChange("time")} autoComplete="time"/>
+              </FormControl>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="AvailableTime">Available Time</InputLabel>
+                <Input id="AvailableTime" name="time" value={this.state.PurchaseTime}
+                       onChange={this.handleChange("time")} autoComplete="time"/>
               </FormControl>
 
             </MuiThemeProvider>
