@@ -30,10 +30,6 @@ const styles = theme => ({
     alignItems: 'center',
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
   },
-  avatar: {
-    margin: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.main,
-  },
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing.unit,
@@ -84,7 +80,7 @@ class Login extends React.Component {
   authorise = (e) => {
 
     let opts = {
-      method: "POST",
+      method: "post",
       body: JSON.stringify({user_account: `${this.state.user_account}`, password: `${this.state.password}`}),
       headers: {
         'Accept': 'application/json',
@@ -98,7 +94,7 @@ class Login extends React.Component {
       })
       .then(status => {
         if (status.logged) {
-          this.setState({auth: status.logged});
+          this.setState({logged: status.logged});
           sessionStorage.setItem('__content_token', status.token);
           console.log(status);
         } else
@@ -111,7 +107,7 @@ class Login extends React.Component {
 
   render() {
     const {classes} = this.props;
-    const {from} = this.props.location.state || {from: {pathname: "/house"}};
+    const {from} = this.props.state || {from: {pathname: "/house"}};
     const {open, msg} = this.state;
 
     if (this.state.logged) {
@@ -128,7 +124,7 @@ class Login extends React.Component {
           <form className={classes.form} onSubmit={this.authorise}>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email Address</InputLabel>
-              <Input id="email" name="email" autoComplete="email" autoFocus onChange={this.handleChange("email")}/>
+              <Input id="email" name="email" autoComplete="email" autoFocus onChange={this.handleChange("user_account")}/>
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Password</InputLabel>

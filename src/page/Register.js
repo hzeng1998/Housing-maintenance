@@ -10,7 +10,8 @@ import {withStyles, MuiThemeProvider, createMuiTheme} from '@material-ui/core/st
 import purple from '@material-ui/core/colors/purple';
 import Grid from '@material-ui/core/Grid';
 import Avatar from "@material-ui/core/Avatar";
-import Snackbar from "./Login";
+import Snackbar from "@material-ui/core/Snackbar";
+import {Redirect} from "react-router-dom";
 
 const styles = theme => ({
   main: {
@@ -77,19 +78,20 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Name: null,
-      Password: null,
-      CheckPassword: null,
-      Phone: null,
-      file: null,
+      Name: "",
+      Password: "",
+      CheckPassword: "",
+      Phone: "",
+      file: "",
       open: false,
       msg: "",
       status: false,
+      Email: props.match.params.email.split("=")[1],
+      filepath: "",
     };
     this.inputRef = React.createRef();
     this.classes = props;
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.chooseFile = this.choose.bind(this);
   }
 
@@ -107,25 +109,25 @@ class Register extends React.Component {
     this.setState({ open: false });
   };
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
 
     if (this.state.Name && this.state.Password && this.state.CheckPassword && this.state.Phone && this.state.file) {
 
-      let {HouseName, Password, Phone, CheckPassword, file} = this.state;
+      let {Name, Password, Phone, CheckPassword, file, Email} = this.state;
 
       if (Password !== CheckPassword) {
         this.setState({open: true, msg: "The Repetitive Password is Not Match"});
         return;
       }
-
       let data = new FormData();
       data.append("File", file);
       data.append("Password", Password);
-      data.append("HouseName", HouseName);
+      data.append("Name", Name);
       data.append("Phone", Phone);
+      data.append("Email", Email);
 
       const opts = {
-        method: "POST",
+        method: "post",
         body: data,
         mode: 'cors',
       };
@@ -134,25 +136,35 @@ class Register extends React.Component {
         .then((res) => res.json())
         .then((data) => {
           data.status || this.setState({open: true, msg: "Register Succeed, Please Log In"});
-          setTimeout(() => this.setState({status: true}));
+          setTimeout(() => this.setState({status: true}), 1000);
         })
         .catch(e => {
         console.log(e);
         });
 
-      event.preventDefault();
+
     } else {
+      console.log("Incomplete");
       this.setState({open: true, msg: "Please Complete All of the Required Information"});
     }
+    event.preventDefault();
+  };
 
-  }
   uploadImage = (e) => {
-    console.log("upload file "+ e.target.value);
-    this.setState({"file": e.target.value});
+    console.log("upload file "+ e.target.files[0]);
+    console.log("file name:", e.target.files[0].name);
+    this.setState({"file": e.target.files[0], filepath: URL.createObjectURL(e.target.files[0])});
   };
 
   render() {
     const {classes, open, msg} = this.classes;
+
+    const {from} = this.props.state || {from: {pathname: "/login"}};
+
+    if (this.state.status) {
+      return <Redirect to={from}/>
+    }
+
     return (
       <main className={classes.main}>
 
@@ -173,8 +185,6 @@ class Register extends React.Component {
             </Typography>
           </Grid>
 
-          <input type="file" name="profileImage" onChange={this.uploadImage} style={{display:'none'}} ref={this.inputRef}/>
-
           <Grid container style={{marginTop: 15}} justify="flex-start" alignItems="center">
             <div
               style={{
@@ -185,19 +195,21 @@ class Register extends React.Component {
               }}
               onClick={ this.chooseFile}>
 
-              <Avatar className={classes.avatar}>
-                <CameraAlt/>
+              <Avatar className={classes.avatar} src={this.state.file ? this.state.filepath: ""}>
+                {this.state.file ? "" : <CameraAlt/>}
               </Avatar>
 
             </div>
-            <h5 style={{fontSize: 14, color: '#A9AEBE', marginLeft: 10}}> Add Profile Picture</h5>
+            <h5 style={{fontSize: 14, color: '#A9AEBE', marginLeft: 10}}>{this.state.file ? this.state.file.name : "this Add Profile Picture"}</h5>
           </Grid>
 
           <Typography variant={"subtitle1"} style={{textAlign:"left", color:"grey", marginTop: "1em"}}>Register via your email to connect with you</Typography>
 
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={this.handleSubmit}>
 
             <MuiThemeProvider theme={theme}>
+
+              <input type="file" name="profileImage" onChange={this.uploadImage} style={{display:'none'}} ref={this.inputRef}/>
 
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="Name">Name</InputLabel>
@@ -226,10 +238,10 @@ class Register extends React.Component {
               type="submit"
               fullWidth
               variant="contained"
-              className={classes.submit}
               color="primary"
-              onClick={this.handleSubmit}>
-              Submit
+              className={classes.submit}
+            >
+              {"SUBMIT"}
             </Button>
           </form>
 

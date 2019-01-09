@@ -1,4 +1,4 @@
-/session
+post /session
 ->
 {
 "user_account" : "",
@@ -9,3 +9,21 @@
 "logged": true/false,
 "token":"",
 }
+
+post /user_profile
+->
+FormData
+
+post /user_account
+ ->
+ {
+ "token": "",
+ }
+
+ <-
+ {
+ "status":true,
+ "avatar":"",
+ "name":"",
+ "house":[],
+ }
