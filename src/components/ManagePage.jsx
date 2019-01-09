@@ -62,17 +62,19 @@ class ManagePage extends React.Component {
               </CardActionArea>
               </Link>
             </Grid>
-            <Grid item xs={12}><Link to={"/house/manage/devices"}>
+            <Grid item xs={12}><Link to={"/house/device_type"}>
               <CardActionArea className={classes.block}>
                 <DeviceIcon className={classes.icon}/>
                 <Typography className={classes.text}>Devices</Typography>
               </CardActionArea></Link>
             </Grid>
             <Grid item xs={12}>
+              <Link to={"/house/order_list"}>
               <CardActionArea className={classes.block}>
                 <OrderIcon className={classes.icon}/>
                 <Typography className={classes.text}>Orders</Typography>
               </CardActionArea>
+              </Link>
             </Grid>
           </Grid>
         </div>

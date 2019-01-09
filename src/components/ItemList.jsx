@@ -18,13 +18,16 @@ const styles = theme => ({
 
 
 class ItemList extends React.Component {
-  
+  state={
+    items: this.props.items,
+  }
   render() {
-    const {classes, items} = this.props;
+    const {classes, listType} = this.props;
+    const {items} = this.state;
     return (
       <List className={classes.list}>
         { items.map( (item, index) =>
-            <Item key={index} content={item}/>
+            <Item key={index} content={item} type={listType}/>
           )}
       </List>
     );
@@ -33,6 +36,7 @@ class ItemList extends React.Component {
 
 ItemList.propTypes = {
   classes: PropTypes.object.isRequired,
+  listType: PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(ItemList);;
+export default withStyles(styles)(ItemList);

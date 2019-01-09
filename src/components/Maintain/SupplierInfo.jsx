@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -8,23 +9,35 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import img from '../../static/image/UI.png'
+import img from '../../static/image/Store.jpg'
+import TopBar from '../TopBar';
 
-const styles = {
+const styles = (theme) =>({
   card: {
-    width: "100%",
+    width: "90%",
     textAlign: 'left',
+    margin: '0 auto',
+    marginTop: theme.spacing.unit * 2,
+    borderRadius: 8,
+    boxShadow: '5px 5px 25px 0px rgba(150,150,150,0.75)',
   },
   media: {
     objectFit: 'cover',
   },
-};
+  btn: {
+    background: 'linear-gradient(to top right, #8E9BFF 0%, #D16DE4 100%)',
+    marginLeft: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 4,
+  }
+});
 
 class SupplierInfo extends React.Component {
   render()
   {
       const {classes} = this.props;
     return (
+      <div>
+        <TopBar title="Supplier Info"/>
         <Card className={classes.card}>
           <CardActionArea>
             <CardMedia
@@ -46,11 +59,14 @@ class SupplierInfo extends React.Component {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button variant="contained" component="span" color="primary">
+            <Link to="/house/maintain/order">
+            <Button variant="contained" component="span" color="primary" className={classes.btn}>
               Order Now
             </Button>
+            </Link>
           </CardActions>
         </Card>
+      </div>
       );
   }
 };

@@ -25,19 +25,42 @@ const styles = theme => ({
 
 });
 
-const alarms = [
-    {title: "Repair order", time: "Tomorrow 15:00"},
-    {title: "Alarm Garden Maintain",time: "5 days later"},
-    {title: "Alarm Roof Maintain", time: "10 days later"},
-  ]
+// const alarms = [
+//     {title: "Alarm Garden Maintain",time: "5 days later"},
+//     {title: "Alarm Roof Maintain", time: "10 days later"},
+//   ]
 
 class AlarmList extends React.Component {
+    state = {
+        alarms: [],
+    }
+
+    //get alarmList from backend API
+    componentDidMount() {
+        const api_url = '/alarm';
+        fetch(api_url).then(res => {
+            if(res['status'] == 200)
+                return res.json();
+            else
+            {
+                return 0;
+                console.log(res);
+            }
+        }).then( res => {
+            console.log(res);
+            if(res.length > 0)
+                this.setState({
+                    alarms: res,
+                })
+        })
+    }
+
     render() {
         const {classes} = this.props;
         return(
             <div className={classes.container}>
                 <TopBar title='Alarm'/>
-                <ItemList items={alarms}/>
+                <ItemList items={this.state.alarms}/>
                 <Link to='/house/alarm/set'>
                 <Fab size= "small" aria-label="Add Alarm" className={classes.fab}>
                     <AddIcon />

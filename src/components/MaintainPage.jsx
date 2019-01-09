@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import GridMenu from './Maintain/GridMenu';
+import GridMenu from './GridMenu';
 
 const styles = theme => ({
     container: {
@@ -11,21 +11,23 @@ const styles = theme => ({
         marginBottom: theme.spacing.unit * 6,
         color: '#aaaaaa',
         width: '100%',
-        // boxShadow: '0px 2px 20px 0px rgba(180,180,180,0.6)',
     },
 });
 
 
 class MaintainPage extends React.Component {
+    state={
+        nextPage: "/house/device_list"
+    }
     render() {
         const {classes} = this.props;
         return(
             <div className={classes.container}>
                 <div className={classes.title}>
-                    <h3>maintain</h3>
-                    <p>Select the type of maintenance you want</p>
+                    <h3>Maintain</h3>
+                    <p>Select the type of device you want to maintain</p>
                 </div>
-                <GridMenu />
+                <GridMenu link={this.state.nextPage}/>
             </div>
         );
     }

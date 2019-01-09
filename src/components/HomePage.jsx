@@ -15,7 +15,7 @@ class HomePage extends React.Component {
         return(
             <div>
                 <MainMenu />
-                <ItemList items={notes}/>
+                <ItemList items={notes} listType="alarm"/>
             </div>
             
         );
