@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/es/Typography/Typography";
 import {Link} from "react-router-dom";
-import WarrantyTitle from "../components/WarrantyTitle";
+import WarantyTitle from "../components/WarrantyTitle";
 
 const styles = theme => ({
   container: {
@@ -19,10 +19,11 @@ const styles = theme => ({
 
 function SettingResult(props) {
   const {classes} = props;
+  const {history} = props;
 
   return (
     <div className={classes.container}>
-      <WarrantyTitle/>
+      <WarantyTitle history={history}/>
       <Typography style={{
         color:"white",
         marginTop: "30%",

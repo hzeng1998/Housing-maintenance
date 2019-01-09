@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import Typography from '@material-ui/core/Typography';
 import BuildIcon from '@material-ui/icons/Build';
 import SetIcon from '@material-ui/icons/Settings';
 import FlashIcon from '@material-ui/icons/FlashOn';
@@ -50,7 +47,7 @@ const grids = [
 	{ "type": "kitchen", "icon":< FoodIcon fontSize='large'/>,},
 	{ "type": "bathroom", "icon":< WaterIcon fontSize='large'/>,},
 	{ "type": "others", "icon":< SetIcon fontSize='large'/>,},
-]
+];
 
 class GridMenu extends React.Component {
 	render() {

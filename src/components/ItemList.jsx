@@ -19,11 +19,12 @@ const styles = theme => ({
 class ItemList extends React.Component {
   state={
     items: this.props.items,
-  }
+  };
 
   render() {
     const {classes, listType, use} = this.props;
     const {items} = this.state;
+    console.log(items);
     return (
       <List className={classes.list}>
         { items.map( (item, index) =>

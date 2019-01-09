@@ -32,8 +32,7 @@ class GridType extends React.Component {
     state = {
         category: this.props.category,
         icon: this.props.icon,
-    }
-
+    };
     render() 
     {
         const {classes} = this.props;

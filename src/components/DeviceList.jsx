@@ -1,11 +1,12 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import withStyles from '@material-ui/core/styles/withStyles';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import ItemList from './ItemList';
-import List from '@material-ui/core/List';
-import Item from './Item';
+import ItemList from "./ItemList";
+import {Link} from "react-router-dom";
+import {Snackbar} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
     container: {
@@ -16,7 +17,6 @@ const styles = theme => ({
         marginBottom: theme.spacing.unit * 2,
         color: '#aaaaaa',
         width: '100%',
-        // boxShadow: '0px 2px 20px 0px rgba(180,180,180,0.6)',
     },
     fab: {
         marginTop: theme.spacing.unit * 10,
@@ -24,42 +24,108 @@ const styles = theme => ({
 
 });
 
-const devices = [
-    {title: "Dinning Table", brand: "IKEA 2016",},
-    {title: "Bedroom Closet", brand: "Houzz 2018"},
-    
-]
-
 class DeviceList extends React.Component {
-    state = {
-        
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false,
+            msg: "",
+            devices: [],
+        };
     }
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
+    getDeviceInfo = () => {
+
+        let opts = {
+            method: "post",
+                body: JSON.stringify({"token": sessionStorage.getItem("__content_token"), "Type": this.props.location.state.category}),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        };
+
+        fetch("/divices_list", opts)
+          .then(res => {
+              return res.json();
+          })
+          .then(data => {
+              if (data.status) {
+                  this.setState({devices: data.data});
+                  console.log(this.state.devices);
+              } else
+                  console.log("fetch error");
+          })
+          .catch(err => console.log(err));
+
+    };
+
     componentDidMount() {
-        console.log(this.props.location.state.category);
+        this.getDeviceInfo();
     }
 
     render() {
         const {classes} = this.props;
-        const category = this.props.location.state.category;
+        const devices = this.state.devices || [];
+        const {open, msg} = this.state;
+        console.log(this.props.location.state.category);
+
         return(
-            <div className={classes.container}>
-                <div className={classes.title}>
-                    <h3>Devices</h3>
-                </div>
-                <List className={classes.list}>
-                    { devices.map( (device, index) =>
-                    <Item key={index} content={device} use="maintain" type="device" category={category}/>
-                    )}
-                </List>
-               
-                {/* <Link to='/house/alarm/set'> */}
-                <Fab size= "small" aria-label="Add" className={classes.fab}>
-                    <AddIcon />
-                </Fab>
-                {/* </Link> */}
-            </div>
+          <div className={classes.container}>
+              <div className={classes.title}>
+                  <h3>Devices</h3>
+              </div>
+              {devices.length ?
+                <ItemList
+                  items={
+                      devices.map((device) => {
+                          return {
+                              "img": device.divice_img,
+                              "title": device.Name,
+                              "detail": device.Brand,
+                          };})}
+                  listType={"device"}
+                  use={"/show_device"}/> : ""}
+              <Fab size= "small" aria-label="Add" className={classes.fab}>
+                  <Link to={
+                      {
+                          pathname:"/adddevice",
+                          state: {
+                              "category": this.props.location.state.category,
+                          }
+                      }
+                  }> <AddIcon /> </Link>
+              </Fab>
+
+              <Snackbar
+                open={open}
+                autoHideDuration={4000}
+                onClose={this.handleClose}
+                ContentProps={{
+                    'aria-describedby': 'snackbar-fab-message-id',
+                    className: classes.snackbarContent,
+                }}
+                message={<span id="snackbar-fab-message-id">{msg}</span>}
+                action={
+                    <Button color="inherit" size="small" onClick={this.handleClose}>
+                        {"OK"}
+                    </Button>
+                }
+                className={classes.snackbar}
+              />
+          </div>
         );
     }
 }
+
+
+DeviceList.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(DeviceList);
