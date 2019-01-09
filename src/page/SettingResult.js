@@ -33,7 +33,7 @@ function SettingResult(props) {
         color:"white",
         marginTop: "30%",
         marginBottom: "30%",
-      }} variant={"subtitle1"}><Link to={"/house/manage/devices"}>Turn to the devices list ></Link></Typography>
+      }} variant={"subtitle1"}><Link to={"/house/device_type"}>Turn to the devices list ></Link></Typography>
     </div>
   );
 }

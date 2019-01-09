@@ -1,11 +1,12 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography'
+import PropTypes from 'prop-types';
+import withStyles from '@material-ui/core/styles/withStyles';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import ItemList from './ItemList';
-
+import ItemList from "../components/ItemList";
+import {Link} from "react-router-dom";
+import {Snackbar} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
     container: {
@@ -16,7 +17,6 @@ const styles = theme => ({
         marginBottom: theme.spacing.unit * 2,
         color: '#aaaaaa',
         width: '100%',
-        // boxShadow: '0px 2px 20px 0px rgba(180,180,180,0.6)',
     },
     fab: {
         marginTop: theme.spacing.unit * 10,
@@ -24,29 +24,96 @@ const styles = theme => ({
 
 });
 
-const orders = [
-    {title: "Chair Repair Order", time: "2019-1-20",},
-    {title: "Table Repair Order", time: "2019-2-1"},
-    
-]
+class OrderList extends React.Component {
 
-class AlarmList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false,
+            msg: "",
+            actions: [],
+        };
+    }
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
+    getOrderInfo = () => {
+
+        let opts = {
+            method: "post",
+            body: JSON.stringify({"token": sessionStorage.getItem("__content_token")}),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        };
+
+        fetch("/orders_list", opts)
+          .then(res => {
+              return res.json();
+          })
+          .then(data => {
+              if (data.status) {
+                  this.setState({actions: data.data});
+                  console.log(this.state.actions);
+              } else
+                  console.log("fetch error");
+          })
+          .catch(err => console.log(err));
+
+    };
+
+    componentDidMount() {
+        this.getOrderInfo();
+    }
+
     render() {
         const {classes} = this.props;
+        const orders = this.state.actions || [];
+        const {open, msg} = this.state;
+
         return(
-            <div className={classes.container}>
-                <div className={classes.title}>
-                    <h3>Orders</h3>
-                </div>
-                <ItemList items={orders} listType="order"/>
-                {/* <Link to='/house/alarm/set'> */}
-                <Fab size= "small" aria-label="Add" className={classes.fab}>
-                    <AddIcon />
-                </Fab>
-                {/* </Link> */}
-            </div>
+          <div className={classes.container}>
+              <div className={classes.title}>
+                  <h3>Orders</h3>
+              </div>
+              {orders.length ?
+                <ItemList
+                  items={
+                      orders.map((order) => {
+                          return {
+                              "title": order.Name,
+                              "detail": order.Problem,
+                          };})}
+                  listType={"order"}
+                  use={"/show_order"}/> : ""}
+
+              <Snackbar
+                open={open}
+                autoHideDuration={4000}
+                onClose={this.handleClose}
+                ContentProps={{
+                    'aria-describedby': 'snackbar-fab-message-id',
+                    className: classes.snackbarContent,
+                }}
+                message={<span id="snackbar-fab-message-id">{msg}</span>}
+                action={
+                    <Button color="inherit" size="small" onClick={this.handleClose}>
+                        {"OK"}
+                    </Button>
+                }
+                className={classes.snackbar}
+              />
+          </div>
         );
     }
 }
 
-export default withStyles(styles)(AlarmList);
+
+OrderList.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(OrderList);

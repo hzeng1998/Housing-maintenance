@@ -56,8 +56,8 @@ class HouseList extends React.Component {
       })
       .then(data => {
         if (data.status) {
-          this.setState({houses: data.data});
-          console.log(this.state.houses);
+          this.setState({actions: data.data});
+          console.log(this.state.actions);
         } else
           console.log("fetch error");
       })
@@ -71,7 +71,7 @@ class HouseList extends React.Component {
 
   render() {
     const {classes} = this.props;
-    const houses = this.state.houses || [];
+    const houses = this.state.actions || [];
     const {open, msg} = this.state;
 
     return(

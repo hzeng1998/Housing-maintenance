@@ -12,7 +12,6 @@ import DeviceType from './DeviceType';
 import OrderForm from  './Maintain/OrderForm';
 import OrderList from './OrderList';
 import DeviceList from './DeviceList';
-import SelectDevice from './Maintain/SelectDevice';
 
 class HouseBase extends React.Component {
     render() {

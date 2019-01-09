@@ -11,6 +11,7 @@ import purple from '@material-ui/core/colors/purple';
 import Grid from '@material-ui/core/Grid';
 import Avatar from "@material-ui/core/Avatar";
 import {Snackbar} from "@material-ui/core";
+import {Redirect} from "react-router-dom";
 
 const styles = theme => ({
   main: {
@@ -82,7 +83,8 @@ class AddDevice extends React.Component {
       PurchaseTime: this.getNowFormatDate(),
       MaintainTime: this.getNowFormatDate(),
       open: false,
-      msg: ""
+      msg: "",
+      status:false,
     };
     this.inputRef = React.createRef();
     this.classes = props;
@@ -145,14 +147,15 @@ class AddDevice extends React.Component {
         .then((res) => res.json())
         .then((data) => {
           if (data.status) {
-            this.setState({open: true, msg: "Add Device Information Succeed"});
-            setTimeout(() => this.props.history.goBack(), 4000);
+           // this.setState({open: true, msg: "Add Device Information Succeed"});
+            //setTimeout(() => this.props.history.goBack(), 4000);
+            this.setState({status:true});
           }
         })
         .catch(e => {
           console.log(e);
+          this.setState({open:true, msg: "Error when fetch data"});
         });
-
 
     } else {
       console.log("Incomplete");
@@ -170,6 +173,10 @@ class AddDevice extends React.Component {
   render() {
     const {classes} = this.props;
     const {open, msg} = this.state;
+
+    if (this.state.status) {
+        return <Redirect to='/setting_result' />;
+    }
 
     return (
       <main className={classes.main}>

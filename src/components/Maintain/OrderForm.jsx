@@ -126,7 +126,7 @@ class OrderForm extends React.Component {
       if(res.status===true){
         this.setState({
           open: true,
-          msg: 'Submit order success!',
+          msg: 'Submit order succeed!',
         });
         setTimeout(() => {
           this.setState({res: true});

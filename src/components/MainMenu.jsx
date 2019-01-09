@@ -130,7 +130,7 @@ class MenuAppBar extends React.Component {
         if (data.status) {
           this.setState({...data.data, status: data.status});
           if (! this.state.houses.length)
-            this.setState({houses: ["Please Add a House"]});
+            this.setState({actions: ["Please Add a House"]});
           else {
             sessionStorage.setItem("__current_house", this.state.houses[this.state.selectedIndex]);
           }
@@ -167,7 +167,7 @@ class MenuAppBar extends React.Component {
             ['My Order', <Receipt/>, "/orderlist"],
             ['My Wallet', <AttachMoney/>, "/wallet"]].map((item, index) => (
             <Link key={item[0]} to={{pathname: item[2],
-              state: { "houses": houses }}}>
+              state: { "actions": houses }}}>
               <ListItem button >
                 <ListItemIcon>{item[1]}</ListItemIcon>
                 <ListItemText primary={item[0]}/>
