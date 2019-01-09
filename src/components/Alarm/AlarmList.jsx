@@ -1,11 +1,10 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import ItemList from '../ItemList';
-import grey from '@material-ui/core/colors/grey';
+// import grey from '@material-ui/core/colors/grey';
 import TopBar from '../TopBar';
 
 const styles = theme => ({
@@ -39,7 +38,7 @@ class AlarmList extends React.Component {
     componentDidMount() {
         const api_url = '/alarm';
         fetch(api_url).then(res => {
-            if(res['status'] == 200)
+            if(res['status'] === 200)
                 return res.json();
             else
             {
@@ -60,7 +59,7 @@ class AlarmList extends React.Component {
         return(
             <div className={classes.container}>
                 <TopBar title='Alarm'/>
-                <ItemList items={this.state.alarms}/>
+                <ItemList items={this.state.alarms} listType="alarm"/>
                 <Link to='/house/alarm/set'>
                 <Fab size= "small" aria-label="Add Alarm" className={classes.fab}>
                     <AddIcon />

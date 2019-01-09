@@ -4,15 +4,6 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import BuildIcon from '@material-ui/icons/Build';
-import SetIcon from '@material-ui/icons/Settings';
-import FlashIcon from '@material-ui/icons/FlashOn';
-import LightIcon from '@material-ui/icons/Flare';
-import TVIcon from '@material-ui/icons/Tv';
-import WaterIcon from '@material-ui/icons/Opacity';
-import FoodIcon from '@material-ui/icons/LocalDining';
-import HomeIcon from '@material-ui/icons/Domain';
-import WallIcon from '@material-ui/icons/Album';
 
 const styles = theme => ({
     root: {
@@ -37,8 +28,6 @@ const styles = theme => ({
       }
 });
 
-const link = "/house/device_list";
-
 class GridType extends React.Component {
     state = {
         type: this.props.type,
@@ -47,10 +36,13 @@ class GridType extends React.Component {
 
     render() 
     {
-        const {classes} = this.props;
+        const {classes } = this.props;
         return (
             <Grid item xs={4}>
-                <Link to={link}> 
+                <Link to={{
+                    pathname: "/house/device_list",
+                    state: {type: this.state.type}
+                }}> 
                     <CardActionArea className={classes.block}>
                         {this.state.icon}
                         <Typography className={classes.text}>

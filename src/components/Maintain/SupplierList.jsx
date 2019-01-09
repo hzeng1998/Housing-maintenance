@@ -2,11 +2,8 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography'
-import grey from '@material-ui/core/colors/grey';
 import List from '@material-ui/core/List';
 import SupplierItem from './SupplierItem';
-import SearchBar from '../SearchBar';
 
 const styles = theme => ({
     container: {
@@ -35,6 +32,7 @@ const suppliers = [
 ]
 
 class SupplierList extends React.Component {
+  
     render() {
         const {classes} = this.props;
         return(

@@ -4,7 +4,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import ClockIcon from '@material-ui/icons/Schedule';
-import SetIcon from '@material-ui/icons/Settings';
 import OrderIcon from '@material-ui/icons/MonetizationOn';
 import DeviceIcon from '@material-ui/icons/OfflineBolt';
 
@@ -19,13 +18,10 @@ const styles = theme => ({
     }
 });
 
-function Icon(props) {
-  if(props.name === "alarm")
-    return <ClockIcon />
-  else if(props.name === "order")
-    return <OrderIcon />
-  else if(props.name === "device")
-    return <DeviceIcon />
+const icons = {
+  "alarm": <ClockIcon />,
+  "order": <OrderIcon />,
+  "device": <DeviceIcon />,
 }
 
 function Item(props) {
@@ -34,7 +30,7 @@ function Item(props) {
     return (
       <ListItem button className={classes.listItem} >
         <Avatar className={classes.avatar}>
-          <Icon name={type}/>
+         {icons[type]}
         </Avatar>
         <ListItemText primary={keys[0]} secondary={keys[1]} />
       </ListItem>

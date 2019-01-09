@@ -1,7 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import ItemList from './ItemList';
@@ -26,19 +25,28 @@ const styles = theme => ({
 
 const devices = [
     {title: "Dinning Table", brand: "IKEA 2016",},
-    {title: "Bedroom Clost", brand: "Houzz 2018"},
+    {title: "Bedroom Closet", brand: "Houzz 2018"},
     
 ]
 
 class DeviceList extends React.Component {
+    state = {
+        //type: this.props.state.type,
+    }
+
+    componentDidMount() {
+        console.log(this.state.type);
+    }
+
     render() {
         const {classes} = this.props;
+    
         return(
             <div className={classes.container}>
                 <div className={classes.title}>
                     <h3>Devices</h3>
                 </div>
-                <ItemList items={devices} listType="order"/>
+                <ItemList items={devices} listType="device"/>
                 {/* <Link to='/house/alarm/set'> */}
                 <Fab size= "small" aria-label="Add" className={classes.fab}>
                     <AddIcon />

@@ -16,11 +16,11 @@ const styles = theme => ({
     },
 });
 
-
 class ItemList extends React.Component {
   state={
     items: this.props.items,
   }
+
   render() {
     const {classes, listType} = this.props;
     const {items} = this.state;

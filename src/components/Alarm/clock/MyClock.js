@@ -2,12 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import ArrowBack from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import SearchBar from './search2.js'
 import DateAndTimePickers from './uptime.js'
-import purple from '@material-ui/core/colors/deepPurple';
 import DateImg from '../../../static/image/time.png'
 import TopBar from '../../TopBar';
 

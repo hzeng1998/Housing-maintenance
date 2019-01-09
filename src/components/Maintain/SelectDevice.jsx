@@ -1,7 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import ItemList from '../ItemList';
@@ -38,7 +37,7 @@ class SelectDevice extends React.Component {
                 <div className={classes.title}>
                     <h3>Devices</h3>
                 </div>
-                <ItemList items={devices} listType="order"/>
+                <ItemList items={devices} listType="device"/>
                 {/* <Link to='/house/alarm/set'> */}
                 <Fab size= "small" aria-label="Add" className={classes.fab}>
                     <AddIcon />
