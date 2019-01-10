@@ -1,21 +1,33 @@
 import React from 'react';
-import ItemList from './ItemList'
 import MainMenu from './MainMenu'
+import Item from "./Item";
+import List from '@material-ui/core/List';
+import PropTypes from "prop-types";
+import {withStyles} from "@material-ui/core";
 
-const notes = [
-    {title: "Repair order", time: "Tomorrow 15:00"},
-    {title: "Alarm Garden Maintain",time: "5 days later"},
-    {title: "Pipe maintain", time: "2019-1-20"},
-];
+const styles = theme => ({
+  list: {
+    width: '100%',
+    height: '100%',
+    maxWidth: 560,
+    margin: '0 auto',
+    marginTop: theme.spacing.unit * 3,
+    marginBottom: theme.spacing.unit * 1,
+    background: '#fafafa',
+  },
+});
 
 class HomePage extends React.Component {
-
 
   constructor(props) {
     super(props);
     this.state = {
       actions:[],
     }
+  }
+
+  componentDidMount() {
+    this.getActionInfo()
   }
 
   getActionInfo = () => {
@@ -46,24 +58,31 @@ class HomePage extends React.Component {
   render() {
 
     const {actions} = this.state;
+    const {classes} = this.props;
 
     return(
       <div>
         <MainMenu />
-        {actions.length ?
-          actions.map((action) =>
-            <ItemList
-              items = {
-                action.type === "alarm" ? [{"title": action.Name, "detail": action.Time}]
-                  : [{"title": action.Name, "detail": action.Problem,}]
-              }
-              listType={action.Action}
-              use={"/show_" + action.Action}
-            />) : ""}
+        <List className={classes.list}>
+          {actions.length ?
+            actions.map((action, index) =>
+              <Item
+                key ={index}
+                content = {
+                  action.Action === "alarm" ? {"title": action.Name, "detail": action.Time}
+                    : {"title": action.Name, "detail": action.Problem,}
+                }
+                type={action.Action}
+                jumpTo={"/show_" + action.Action}
+              />) : ""}
+        </List>
       </div>
-            
     );
   }
 }
 
-export default HomePage;
+HomePage.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(HomePage);

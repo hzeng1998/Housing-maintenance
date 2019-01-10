@@ -1,7 +1,5 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
-import grey from '@material-ui/core/colors/grey';
 
 const styles = theme => ({
     container: {

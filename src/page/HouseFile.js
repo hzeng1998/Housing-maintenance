@@ -6,10 +6,10 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Typography from '@material-ui/core/Typography';
 import {withStyles, MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
-import deepPurple from '@material-ui/core/colors/deepPurple';
 import purple from '@material-ui/core/colors/purple';
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Snackbar from "./HouseInfo";
 
 const styles = theme => ({
   main: {
@@ -35,7 +35,7 @@ const styles = theme => ({
     background: 'linear-gradient(to top right, #7D8DFB 0%, #B6ADFD 100%)',
   },
   form: {
-    borderbottom: '#9370db',
+    borderBottom: '#9370db',
     marginTop: "20%",
     marginBottom:"20%",
     width: '100%', // Fix IE 11 issue.
@@ -65,10 +65,14 @@ const styles = theme => ({
   link: {
     color: "blue",
     textDecoration: "none",
-  }
+  },
+  snackbar: {
+    position: 'absolute',
+  },
+  snackbarContent: {
+    width: 360,
+  },
 });
-
-const mypuple = deepPurple['A200'];
 
 const theme = createMuiTheme({
   palette: {
@@ -83,17 +87,11 @@ class HouseFile extends React.Component {
     this.state = {
       ReportURL: '',
       OwnerName: '',
+      msg:"",
+      open: false
     };
-    this.inputRef = React.createRef();
     this.classes = props;
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.chooseFile = this.choose.bind(this);
   }
-
-  choose = () => {
-    this.inputRef.current.click();
-  };
 
   handleChange = name => event => {
     this.setState({
@@ -101,17 +99,50 @@ class HouseFile extends React.Component {
     });
   };
 
-  handleSubmit(event) {
-    console.log('A name was submitted: ' + this.state.ReportURL);
-    event.preventDefault();
-  }
 
-  uploadImage() {
-    console.log("upload file");
-  }
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  handleSubmit = (event) => {
+
+    if (this.state.OwnerName && this.state.ReportURL) {
+
+      let {OwnerName, ReportURL} = this.state;
+
+      let data = new FormData();
+      data.append("OwnerName", OwnerName);
+      data.append("ReportURL", ReportURL);
+
+      const opts = {
+        method: "post",
+        body: data,
+        mode: 'cors',
+      };
+
+      fetch("/house_report", opts)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status) {
+            this.setState({open: true, msg: "Add House Information Succeed"});
+            setTimeout(() => this.props.history.goBack(), 1000);
+          }
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+
+    } else {
+      console.log("Incomplete");
+      this.setState({open: true, msg: "Please Complete All of the Required Information"});
+    }
+    event.preventDefault();
+  };
 
   render() {
-    const {classes} = this.classes;
+    const {classes} = this.props;
+    const {msg, open} =this.state;
     return (
       <main className={classes.main}>
 
@@ -163,6 +194,24 @@ class HouseFile extends React.Component {
               Submit
             </Button>
           </form>
+
+          <Snackbar
+            open={open}
+            autoHideDuration={4000}
+            onClose={this.handleClose}
+            ContentProps={{
+              'aria-describedby': 'snackbar-fab-message-id',
+              className: classes.snackbarContent,
+            }}
+            message={<span id="snackbar-fab-message-id">{msg}</span>}
+            action={
+              <Button color="inherit" size="small" onClick={this.handleClose}>
+                OK
+              </Button>
+            }
+            className={classes.snackbar}
+          />
+
         </div>
       </main>
     );

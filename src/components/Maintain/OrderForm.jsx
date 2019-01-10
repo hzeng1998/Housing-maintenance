@@ -25,7 +25,7 @@ const styles = theme => ({
     },
   },
   paper: {
-    marginTop: theme.spacing.unit * 0,
+    marginTop: 0,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -36,7 +36,7 @@ const styles = theme => ({
     background: 'linear-gradient(to top right, #7D8DFB 0%, #B6ADFD 100%)',
   },
   form: {
-    borderbottom: '#9370db',
+    borderBottom: '#9370db',
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing.unit,
   },
@@ -132,7 +132,7 @@ class OrderForm extends React.Component {
           this.setState({res: true});
         }, 1000);
       }    
-    })
+    });
 
     console.log("Order submitted!");
     event.preventDefault();
@@ -141,7 +141,6 @@ class OrderForm extends React.Component {
   render() {
     const {classes} = this.classes;
     const {info, open, msg} = this.state;
-    const supplier = info.supplier.content.name;
     const device = info.device.values.content;
     const deviceInfo = device.title + ' / ' + device.detail;
 

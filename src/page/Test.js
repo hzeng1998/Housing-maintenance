@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Upload from 'rc-upload';
 
 const style = `

@@ -1,12 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
-import SearchBar from './search2.js'
 import DateAndTimePickers from './uptime.js'
 import DateImg from '../../../static/image/time.png'
 import TopBar from '../../TopBar';
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   root: {
@@ -65,8 +63,16 @@ class MyClock extends React.Component {
       <div className={classes.root} >
         <TopBar title='Alarm'/>
         <img src={DateImg} width="60%" height="60%" alt="date picker"/>
+
+        <TextField
+                disabled
+                label="Selected Device"
+                defaultValue="111"
+                margin="normal" fullWidth
+              />
+
         <DateAndTimePickers />
-        <SearchBar />
+        
         <Button variant="contained" className={classes.setBtn}>
           Set the alarm
         </Button>

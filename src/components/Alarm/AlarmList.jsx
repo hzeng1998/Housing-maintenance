@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import ItemList from "../components/ItemList";
+import ItemList from "../../components/ItemList";
 import {Link} from "react-router-dom";
 import {Snackbar} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
@@ -77,7 +77,7 @@ class AlarmList extends React.Component {
     return(
       <div className={classes.container}>
         <div className={classes.title}>
-          <h3>Houses</h3>
+          <h3>Alarm</h3>
         </div>
         {alarms.length ?
           <ItemList
@@ -92,7 +92,7 @@ class AlarmList extends React.Component {
 
 
         <Fab size= "small" aria-label="Add" className={classes.fab}>
-          <Link to={"/add"}> <AddIcon /> </Link>
+          <Link to={"/house/alarm/select_device"}> <AddIcon /> </Link>
         </Fab>
 
         <Snackbar

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import BottomNav from './BottomNav'
 import HomePage from './HomePage'
 import MaintainPage from './MaintainPage'
@@ -12,29 +12,32 @@ import DeviceType from './DeviceType';
 import OrderForm from  './Maintain/OrderForm';
 import OrderList from './OrderList';
 import DeviceList from './DeviceList';
+import SelectDevice from './Alarm/SelectDevice';
+import PrivateRoute from "./PrivateRoute";
 
 class HouseBase extends React.Component {
-    render() {
-        return(
-            <div>
-                <Switch>
-                    <Route exact path='/house' component={HomePage} />
-                    <Route exact path='/house/maintain' component={MaintainPage} />
-                    <Route exact path='/house/maintain/supplier_list' component={SupplierList} />
-                    <Route exact path='/house/maintain/supplier_info' component={SupplierInfo} />
-                    <Route exact path='/house/maintain/order' component={OrderForm}/>
-                    <Route exact path='/house/alarm' component={AlarmList} />
-                    <Route exact path='/house/alarm/set' component={SetAlarm} />
-                    <Route exact path='/house/manage' component={ManagePage} />
-                    <Route exact path={"/house/device_type"} component={DeviceType}/>
-                    <Route exact path={"/house/device_list"} component={DeviceList}/>
-                    <Route exact path={"/house/order_list"} component={OrderList}/>             
-                </Switch>
-                <BottomNav />
-            </div>
-            
-        );
-    }
+  render() {
+    return(
+      <div>
+        <Switch>
+          <PrivateRoute exact path='/house' component={HomePage} />
+          <PrivateRoute exact path='/house/maintain' component={MaintainPage} />
+          <PrivateRoute exact path='/house/maintain/supplier_list' component={SupplierList} />
+          <PrivateRoute exact path='/house/maintain/supplier_info' component={SupplierInfo} />
+          <PrivateRoute exact path='/house/maintain/order' component={OrderForm}/>
+          <PrivateRoute exact path='/house/alarm' component={AlarmList} />
+          <PrivateRoute exact path='/house/alarm/select_device' component={SelectDevice} />
+          <PrivateRoute exact path='/house/alarm/set' component={SetAlarm} />
+          <PrivateRoute exact path='/house/manage' component={ManagePage} />
+          <PrivateRoute exact path={"/house/device_type"} component={DeviceType}/>
+          <PrivateRoute exact path={"/house/device_list"} component={DeviceList}/>
+          <PrivateRoute exact path={"/house/order_list"} component={OrderList}/>
+        </Switch>
+        <BottomNav />
+      </div>
+
+    );
+  }
 }
 
 export default HouseBase;

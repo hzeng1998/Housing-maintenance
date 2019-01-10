@@ -52,6 +52,7 @@ const styles = {
   root: {
     flexGrow: 1,
     width: '100%',
+    overflow:"hidden",
   },
   grow: {
     flexGrow: 1,
@@ -220,14 +221,12 @@ class MenuAppBar extends React.Component {
                     aria-haspopup="true"
                     aria-controls="lock-menu"
                     onClick={this.handleClickListItem}>
-                    <span className={classes.selectTitle}>
-                      <center>
-                        {houses[this.state.selectedIndex]}
-                      </center>
-                    </span>
+                    <span className={classes.selectTitle} style={{textAlign: "center"}}>
+                      {houses[this.state.selectedIndex]}
+                      </span>
                   </ListItem>
                 </List>
-                <center><Menu
+                <Menu
                   anchorEl={anchorEl}
                   open={Boolean(anchorEl)}
                   onClose={this.handleClose}
@@ -243,7 +242,7 @@ class MenuAppBar extends React.Component {
                       {option}
                     </MenuItem>
                   ))}
-                </Menu></center>
+                </Menu>
               </Grid>
               <Grid item xs = {2} />
             </Grid>

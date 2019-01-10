@@ -67,7 +67,13 @@ const styles = theme => ({
   link: {
     color: "blue",
     textDecoration: "none",
-  }
+  },
+  snackbar: {
+    position: 'absolute',
+  },
+  snackbarContent: {
+    width: 360,
+  },
 });
 
 const theme = createMuiTheme({

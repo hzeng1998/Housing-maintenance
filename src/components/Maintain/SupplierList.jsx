@@ -1,7 +1,6 @@
 ///house/maintain/supplier
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
 import List from '@material-ui/core/List';
 import SupplierItem from './SupplierItem';
 
