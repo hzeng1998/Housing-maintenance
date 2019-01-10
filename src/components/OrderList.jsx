@@ -66,6 +66,12 @@ class OrderList extends React.Component {
         this.getOrderInfo();
     }
 
+    componentWillUnmount(){
+        this.setState = (state,callback) => {
+            return;
+        };
+    }
+
     render() {
         const {classes} = this.props;
         const orders = this.state.actions || [];

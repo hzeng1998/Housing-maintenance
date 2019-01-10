@@ -14,6 +14,7 @@ import OrderList from './OrderList';
 import DeviceList from './DeviceList';
 import SelectDevice from './Alarm/SelectDevice';
 import PrivateRoute from "./PrivateRoute";
+import HouseList from "../page/HouseList";
 
 class HouseBase extends React.Component {
   render() {
@@ -32,6 +33,7 @@ class HouseBase extends React.Component {
           <PrivateRoute exact path={"/house/device_type"} component={DeviceType}/>
           <PrivateRoute exact path={"/house/device_list"} component={DeviceList}/>
           <PrivateRoute exact path={"/house/order_list"} component={OrderList}/>
+          <PrivateRoute exact path={"/house/house_list"} component={HouseList} />
         </Switch>
         <BottomNav />
       </div>

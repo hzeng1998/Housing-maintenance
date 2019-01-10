@@ -17,14 +17,12 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 4,
     color: '#aaaaaa',
     width: '100%',
-    // boxShadow: '0px 2px 20px 0px rgba(180,180,180,0.6)',
   },
   block: {
     width: '100%',
     height: 100,
     borderRadius: 8,
     textAlign: 'center',
-    //backgroundColor: '#9896f1',
     color: '#ffffff',
     boxShadow: '0px 0px 20px 0px rgba(150,150,150,0.75)',
     background: 'linear-gradient(to top right, #7D8DFB 0%, #B6ADFD 100%)',
@@ -55,7 +53,7 @@ class ManagePage extends React.Component {
         <div className={classes.grid}>
           <Grid container spacing={16}>
             <Grid item xs={12}>
-              <Link to={"/addhouse"}>
+              <Link to={"/house/house_list"}>
               <CardActionArea className={classes.block}>
                 <HouseIcon className={classes.icon}/>
                 <Typography className={classes.text}>Houses</Typography>

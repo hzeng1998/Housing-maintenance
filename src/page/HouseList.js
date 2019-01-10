@@ -69,6 +69,12 @@ class HouseList extends React.Component {
     this.getHouseInfo();
   }
 
+  componentWillUnmount(){
+    this.setState = (state,callback) => {
+      return;
+    };
+  }
+
   render() {
     const {classes} = this.props;
     const houses = this.state.actions || [];

@@ -30,6 +30,12 @@ class HomePage extends React.Component {
     this.getActionInfo()
   }
 
+  componentWillUnmount(){
+    this.setState = (state,callback) => {
+      return;
+    };
+  }
+
   getActionInfo = () => {
 
     let opts = {

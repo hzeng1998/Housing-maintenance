@@ -79,6 +79,12 @@ class DeviceList extends React.Component {
         this.getDeviceInfo();
     }
 
+    componentWillUnmount(){
+        this.setState = (state,callback) => {
+            return;
+        };
+    }
+
     render() {
         const {classes} = this.props;
         const devices = this.state.devices || [];

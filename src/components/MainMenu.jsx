@@ -163,9 +163,9 @@ class MenuAppBar extends React.Component {
 
           </Grid>
 
-          {[['Profile', <AccountBox/>, "#"],
-            ['My Houses', <Home/>, "/houselist"],
-            ['My Order', <Receipt/>, "/orderlist"],
+          {[['Profile', <AccountBox/>, "/house"],
+            ['My Houses', <Home/>, "/house/house_list"],
+            ['My Order', <Receipt/>, "/house/order_list"],
             ['My Wallet', <AttachMoney/>, "/wallet"]].map((item, index) => (
             <Link key={item[0]} to={{pathname: item[2],
               state: { "actions": houses }}}>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Home from './page/HomePage'
+import Home from './page/Home'
 import CssBaseline from "@material-ui/core/es/CssBaseline/CssBaseline";
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
@@ -14,8 +14,6 @@ import HouseBase from './components/HouseBase';
 import SettingResult from "./page/SettingResult";
 import OrderResult from "./components/OrderResult";
 import PrivateRoute from "./components/PrivateRoute";
-import HouseList from "./page/HouseList";
-import OrderList from "./components/OrderList";
 
 class App extends Component {
 
@@ -37,9 +35,6 @@ class App extends Component {
             <PrivateRoute path={"/house"} component={HouseBase}/>
             <PrivateRoute path={"/order_result"} component={OrderResult}/>
             <PrivateRoute exact path={"/setting_result"} component={SettingResult}/>
-            <PrivateRoute path={"/houselist"} component={HouseList} />
-            <PrivateRoute path={"/orderlist"} component={OrderList} />
-
           </Switch>
         </div>
       </Router>
